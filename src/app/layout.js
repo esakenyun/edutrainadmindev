@@ -13,7 +13,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta httpEquiv="Access-Control-Allow-Origin" content="*" />
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-request" />
       </head>
       <body className={cairo.className}>
         {children}
