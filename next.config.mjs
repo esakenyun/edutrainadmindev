@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["103.55.33.57"],
+    domains: ["edutrain.uinsgd.ac.id"],
   },
 };
 
