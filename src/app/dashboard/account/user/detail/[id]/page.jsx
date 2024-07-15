@@ -64,14 +64,14 @@ export default function UserDetail({ params }) {
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div>
                 <p className="text-center font-bold">Statistik Transaksi</p>
-                <div className="flex justify-center mt-20">
+                <div className="mt-10 w-full">
                   <PieChartUser />
                 </div>
               </div>
-              <div>
-                <p className="font-bold text-center">Kategori Materi Favorit</p>
-                <div className="flex flex-col gap-3 mt-5 items-center">
-                  <div className="flex gap-2 items-start">
+              <div className="ml-0 sm:ml-10">
+                <p className="font-bold">Kategori Materi Favorit</p>
+                <div className="flex flex-col gap-3 mt-5">
+                  <div className="flex gap-2">
                     <div className="rounded-full bg-black"></div>
                     <p className="text-sm">Pengembangan Web:</p>
                     <p className="text-sm">21</p>

@@ -172,12 +172,7 @@ export default function UserTable({ searchName }) {
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10, 25, 50]}
-          checkboxSelection
-          disableRowSelectionOnClick
           onRowDoubleClick={handleRowDoubleClick}
-          components={{
-            noRowsOverlay: filteredUsers.length > 0 ? null : NoRecordRow,
-          }}
           sx={{
             "& .MuiDataGrid-cell:focus": {
               outline: "none",
@@ -185,6 +180,9 @@ export default function UserTable({ searchName }) {
             "& .MuiDataGrid-cell:focus-within": {
               outline: "none",
             },
+          }}
+          components={{
+            noRowsOverlay: filteredUsers.length > 0 ? null : NoRecordRow,
           }}
         />
       </Box>

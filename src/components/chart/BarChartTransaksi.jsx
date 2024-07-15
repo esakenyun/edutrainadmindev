@@ -56,8 +56,8 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
-const BarChart = () => {
-  const salesData = [500, 450, 600, 100, 450, 200, 450];
+const BarChartTransaksi = () => {
+  const salesData = [350, 300, 400, 50, 300, 150, 300];
   const maxSalesIndex = salesData.indexOf(Math.max(...salesData));
 
   const [chartData, setChartData] = useState({
@@ -137,4 +137,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
+export default BarChartTransaksi;

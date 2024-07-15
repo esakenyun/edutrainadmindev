@@ -4,7 +4,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { IoIosMore } from "react-icons/io";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/navigation";
-import { handleFetchOrderData } from "@/helpers/orderHelper";
 
 const formatDate = (dateString) => {
   const options = {
@@ -65,88 +64,88 @@ const columns = [
   },
 ];
 
-// const allRows = [
-//   {
-//     id: 1,
-//     Tanggal: "1 Agustus 2024",
-//     Invoice: "INV2024022001",
-//     Email: "dayensptr@gmail.com",
-//     JumlahPesanan: 200,
-//     TotalPendapatan: "Rp.1.200.000",
-//   },
-//   {
-//     id: 2,
-//     Tanggal: "2 Agustus 2024",
-//     Invoice: "INV2024022002",
-//     Email: "johndoe@gmail.com",
-//     JumlahPesanan: 150,
-//     TotalPendapatan: "Rp.1.050.000",
-//   },
-//   {
-//     id: 3,
-//     Tanggal: "2 Agustus 2024",
-//     Invoice: "INV2024022004",
-//     Email: "eliaiboy@gmail.com",
-//     JumlahPesanan: 7,
-//     TotalPendapatan: "Rp.70.000",
-//   },
-//   {
-//     id: 4,
-//     Tanggal: "4 Agustus 2024",
-//     Invoice: "INV2024022006",
-//     Email: "msyahrul11@gmail.com",
-//     JumlahPesanan: 10,
-//     TotalPendapatan: "Rp.1.200.000",
-//   },
-//   {
-//     id: 5,
-//     Tanggal: "5 Agustus 2024",
-//     Invoice: "INV20240220016",
-//     Email: "sii12prian@gmail.com",
-//     JumlahPesanan: 90,
-//     TotalPendapatan: "Rp.12.250.000",
-//   },
-//   {
-//     id: 6,
-//     Tanggal: "6 Agustus 2024",
-//     Invoice: "INV20240220018",
-//     Email: "Alexiozp@gmail.com",
-//     JumlahPesanan: 80,
-//     TotalPendapatan: "Rp.800.000",
-//   },
-//   {
-//     id: 7,
-//     Tanggal: "6 Agustus 2024",
-//     Invoice: "INV20240220022",
-//     Email: "fakk@gmail.com",
-//     JumlahPesanan: 180,
-//     TotalPendapatan: "Rp.1.500.000",
-//   },
-//   {
-//     id: 8,
-//     Tanggal: "6 Agustus 2024",
-//     Invoice: "INV20240220022",
-//     Email: "torii@gmail.com",
-//     JumlahPesanan: 180,
-//     TotalPendapatan: "Rp.1.500.000",
-//   },
-//   {
-//     id: 9,
-//     Tanggal: "6 Agustus 2024",
-//     Invoice: "INV20240220022",
-//     Email: "dasdas@gmail.com",
-//     JumlahPesanan: 180,
-//     TotalPendapatan: "Rp.1.500.000",
-//   },
-//   {
-//     id: 10,
-//     Tanggal: "6 Agustus 2024",
-//     Invoice: "INV20240220022",
-//     Email: "ibnu@gmail.com",
-//     JumlahPesanan: 180,
-//     TotalPendapatan: "Rp.1.500.000",
-//   },
-// ];
+const allRows = [
+  {
+    id: 1,
+    Tanggal: "1 Agustus 2024",
+    Invoice: "INV2024022001",
+    Email: "dayensptr@gmail.com",
+    JumlahPesanan: 200,
+    TotalPendapatan: "Rp.1.200.000",
+  },
+  {
+    id: 2,
+    Tanggal: "2 Agustus 2024",
+    Invoice: "INV2024022002",
+    Email: "johndoe@gmail.com",
+    JumlahPesanan: 150,
+    TotalPendapatan: "Rp.1.050.000",
+  },
+  {
+    id: 3,
+    Tanggal: "2 Agustus 2024",
+    Invoice: "INV2024022004",
+    Email: "eliaiboy@gmail.com",
+    JumlahPesanan: 7,
+    TotalPendapatan: "Rp.70.000",
+  },
+  {
+    id: 4,
+    Tanggal: "4 Agustus 2024",
+    Invoice: "INV2024022006",
+    Email: "msyahrul11@gmail.com",
+    JumlahPesanan: 10,
+    TotalPendapatan: "Rp.1.200.000",
+  },
+  {
+    id: 5,
+    Tanggal: "5 Agustus 2024",
+    Invoice: "INV20240220016",
+    Email: "sii12prian@gmail.com",
+    JumlahPesanan: 90,
+    TotalPendapatan: "Rp.12.250.000",
+  },
+  {
+    id: 6,
+    Tanggal: "6 Agustus 2024",
+    Invoice: "INV20240220018",
+    Email: "Alexiozp@gmail.com",
+    JumlahPesanan: 80,
+    TotalPendapatan: "Rp.800.000",
+  },
+  {
+    id: 7,
+    Tanggal: "6 Agustus 2024",
+    Invoice: "INV20240220022",
+    Email: "fakk@gmail.com",
+    JumlahPesanan: 180,
+    TotalPendapatan: "Rp.1.500.000",
+  },
+  {
+    id: 8,
+    Tanggal: "6 Agustus 2024",
+    Invoice: "INV20240220022",
+    Email: "torii@gmail.com",
+    JumlahPesanan: 180,
+    TotalPendapatan: "Rp.1.500.000",
+  },
+  {
+    id: 9,
+    Tanggal: "6 Agustus 2024",
+    Invoice: "INV20240220022",
+    Email: "dasdas@gmail.com",
+    JumlahPesanan: 180,
+    TotalPendapatan: "Rp.1.500.000",
+  },
+  {
+    id: 10,
+    Tanggal: "6 Agustus 2024",
+    Invoice: "INV20240220022",
+    Email: "ibnu@gmail.com",
+    JumlahPesanan: 180,
+    TotalPendapatan: "Rp.1.500.000",
+  },
+];
 
 const itemsPerPage = 7;
 
@@ -167,8 +166,9 @@ export default function OrderTable() {
   };
 
   const handleFetchOrdersData = async () => {
-    const response = await handleFetchOrderData();
-    setIsOrdersData(response);
+    // const response = await handleFetchOrderData();
+    // setIsOrdersData(response);
+    setIsOrdersData(allRows);
     setLoading(false);
   };
 

@@ -1,5 +1,7 @@
 "use client";
-import BarChart from "@/components/chart/barchart";
+
+import BarChartPenggunaBaru from "@/components/chart/BarChartPenggunaBaru";
+import BarChartTransaksi from "@/components/chart/BarChartTransaksi";
 import Image from "next/image";
 import { useState } from "react";
 import { FiActivity, FiDollarSign, FiShoppingBag, FiUser } from "react-icons/fi";
@@ -74,8 +76,16 @@ const Kemarin = () => (
       </div>
     </div>
     <div className="grid lg:grid-cols-4 gap-5">
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Pengguna Baru</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">Kemarin</p>
+        <BarChartPenggunaBaru />
       </div>
       <div className="rounded-md bg-primary-white shadow-lg py-4">
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
@@ -145,8 +155,16 @@ const Kemarin = () => (
           </div>
         </div>
       </div>
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Jumlah Transaksi</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">Kemarin</p>
+        <BarChartTransaksi />
       </div>
       <div className="items-center rounded-md bg-primary-white py-5 px-5 shadow-lg h-fit">
         <h1 className="text-sm font-bold text-[#515151]">Jadwal Pertemuan yang akan datang</h1>
@@ -245,7 +263,7 @@ const TujuhHari = () => (
           </div>
         </div>
         <p className="px-5 text-[10px] mt-2">7 Hari Terakhir</p>
-        <BarChart />
+        <BarChartPenggunaBaru />
       </div>
       <div className="rounded-md bg-primary-white shadow-lg py-4">
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
@@ -315,8 +333,16 @@ const TujuhHari = () => (
           </div>
         </div>
       </div>
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Jumlah Transaksi</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">7 Hari Terakhir</p>
+        <BarChartTransaksi />
       </div>
       <div className="items-center rounded-md bg-primary-white py-5 px-5 shadow-lg h-fit">
         <h1 className="text-sm font-bold text-[#515151]">Jadwal Pertemuan yang akan datang</h1>
@@ -406,8 +432,16 @@ const TigaPuluh = () => (
       </div>
     </div>
     <div className="grid lg:grid-cols-4 gap-5">
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Pengguna Baru</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">30 Hari Terakhir</p>
+        <BarChartPenggunaBaru />
       </div>
       <div className="rounded-md bg-primary-white shadow-lg py-4">
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
@@ -477,8 +511,16 @@ const TigaPuluh = () => (
           </div>
         </div>
       </div>
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Jumlah Transaksi</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">30 Hari Terakhir</p>
+        <BarChartTransaksi />
       </div>
       <div className="items-center rounded-md bg-primary-white py-5 px-5 shadow-lg h-fit">
         <h1 className="text-sm font-bold text-[#515151]">Jadwal Pertemuan yang akan datang</h1>
@@ -568,8 +610,16 @@ const DuaBelasBulan = () => (
       </div>
     </div>
     <div className="grid lg:grid-cols-4 gap-5">
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Pengguna Baru</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">12 Bulan Terakhir</p>
+        <BarChartPenggunaBaru />
       </div>
       <div className="rounded-md bg-primary-white shadow-lg py-4">
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
@@ -639,8 +689,16 @@ const DuaBelasBulan = () => (
           </div>
         </div>
       </div>
-      <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-        <BarChart />
+      <div className="rounded-md bg-primary-white shadow-lg md:col-span-2 px-5 py-2">
+        <div className="px-5 flex justify-between items-center">
+          <p className="lg:text-lg">Jumlah Transaksi</p>
+          <div className="flex items-center text-[#4C49F1] border border-primary-blue rounded-full px-2 hover:cursor-pointer hover:scale-105">
+            <p className="text-[10px]">Lihat Laporan</p>
+            <IoIosArrowDown className="text-xs" />
+          </div>
+        </div>
+        <p className="px-5 text-[10px] mt-2">12 Bulan Terakhir</p>
+        <BarChartTransaksi />
       </div>
       <div className="items-center rounded-md bg-primary-white py-5 px-5 shadow-lg h-fit">
         <h1 className="text-sm font-bold text-[#515151]">Jadwal Pertemuan yang akan datang</h1>
@@ -722,150 +780,3 @@ export default function Dashboard() {
     </>
   );
 }
-
-// import React from "react";
-// import { FiActivity, FiDollarSign, FiShoppingBag, FiUser } from "react-icons/fi";
-// import { IoIosMore } from "react-icons/io";
-// import Barchart from "../components/BarChart";
-// import BarChart from "../components/BarChart";
-
-// export default function Dashboard() {
-//   return (
-//     <>
-//       <div className="py-7">
-//         <div className="flex items-center justify-between">
-//           <div className="py-2 px-2 text-xs md:text-2xl font-extrabold border-b-2 border-primary-blue text-primary-blue">Dashboard</div>
-//           <div>
-//             <div className="lg:hidden items-center">
-//               <label htmlFor="Tab" className="sr-only"></label>
-//               <select id="Tab" className="w-full rounded-md border-gray-200 py-2">
-//                 <option value="kemarin">Kemarin</option>
-//                 <option value="7hari">7 hari terakhir</option>
-//                 <option value="30hari">30 hari terakhir</option>
-//                 <option value="12bulan">12 bulan terakhir</option>
-//               </select>
-//             </div>
-//             <div className="hidden lg:block">
-//               <nav className="-mb-px flex items-center gap-6" aria-label="Tabs">
-//                 <a href="#" className="inline-flex shrink-0 items-center border-b-2 border-transparent px-1 text-sm text-gray-500 hover:border-gray-300 hover:text-gray-700">
-//                   Kemarin
-//                 </a>
-//                 <a href="#" className="inline-flex shrink-0 items-center border-b-2 border-primary-blue text-primary-blue px-1 text-sm" aria-current="page">
-//                   7 hari terakhir
-//                 </a>
-//                 <a href="#" className="inline-flex shrink-0 items-center border-b-2 border-transparent px-1 text-sm text-gray-500 hover:border-gray-300 hover:text-gray-700">
-//                   30 hari terakhir
-//                 </a>
-//                 <a href="#" className="inline-flex shrink-0 items-center border-b-2 border-transparent px-1 text-sm text-gray-500 hover:border-gray-300 hover:text-gray-700">
-//                   12 bulan terakhir
-//                 </a>
-//               </nav>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="pt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-//           <div className="rounded-md bg-primary-white h-40 shadow-lg">
-//             <div className="flex py-3 px-5 items-center pb-3 border-b-2 justify-between">
-//               <div className="flex items-center gap-2">
-//                 <FiDollarSign className="text-xl" />
-//                 <p className="text-sm">Pemasukan</p>
-//               </div>
-//               <div>
-//                 <IoIosMore className="text-xl" />
-//               </div>
-//             </div>
-//             <div className="py-4 pl-9 text-xl">Rp.2.178.000</div>
-//             <div className="flex items-center pl-9 gap-2 ">
-//               <div className="px-5 rounded-xl bg-green-200 text-[12px] text-green-500 font-bold">+ 23.5</div>
-//               <div className="text-[10px] text-secondary-grey ">7 hari terakhir</div>
-//             </div>
-//           </div>
-//           <div className="rounded-md bg-primary-white h-40 shadow-lg">
-//             <div className="flex py-3 px-5 items-center pb-3 border-b-2 justify-between">
-//               <div className="flex items-center gap-2">
-//                 <FiActivity className="text-xl" />
-//                 <p className="text-sm">Rata-Rata Pemasukan</p>
-//               </div>
-//               <div>
-//                 <IoIosMore className="text-xl" />
-//               </div>
-//             </div>
-//             <div className="py-4 pl-9 text-xl">Rp.896.000</div>
-//             <div className="flex items-center pl-9 gap-2 ">
-//               <div className="px-5 rounded-xl bg-red-300 text-[12px] text-warm-red font-bold">- 23.5</div>
-//               <div className="text-[10px] text-secondary-grey ">7 hari terakhir</div>
-//             </div>
-//           </div>
-//           <div className="rounded-md bg-primary-white h-40 shadow-lg">
-//             <div className="flex py-3 px-5 items-center pb-3 border-b-2 justify-between">
-//               <div className="flex items-center gap-2">
-//                 <FiShoppingBag className="text-xl" />
-//                 <p className="text-sm">Jumlah Pesanan</p>
-//               </div>
-//               <div>
-//                 <IoIosMore className="text-xl" />
-//               </div>
-//             </div>
-//             <div className="py-4 pl-9 text-xl">100</div>
-//             <div className="flex items-center pl-9 gap-2 ">
-//               <div className="px-5 rounded-xl bg-red-300 text-[12px] text-warm-red font-bold">- 23.5</div>
-//               <div className="text-[10px] text-secondary-grey ">7 hari terakhir</div>
-//             </div>
-//           </div>
-//           <div className="rounded-md bg-primary-white h-40 shadow-lg">
-//             <div className="flex py-3 px-5 items-center pb-3 border-b-2 justify-between">
-//               <div className="flex items-center gap-2">
-//                 <FiUser className="text-xl" />
-//                 <p className="text-sm">Jumlah Pengguna</p>
-//               </div>
-//               <div>
-//                 <IoIosMore className="text-xl" />
-//               </div>
-//             </div>
-//             <div className="py-4 pl-9 text-xl">1400</div>
-//             <div className="flex items-center pl-9 gap-2 ">
-//               <div className="px-5 rounded-xl bg-red-300 text-[12px] text-warm-red font-bold">- 23.5</div>
-//               <div className="text-[10px] text-secondary-grey ">7 hari terakhir</div>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="grid lg:grid-cols-4 gap-5">
-//           <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-//             <BarChart />
-//           </div>
-//           <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg">Calendar</div>
-//           <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:row-span-2">negara</div>
-//           <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg md:col-span-2">
-//             <Barchart />
-//           </div>
-//           <div className="items-center rounded-md bg-primary-white py-10 px-2 shadow-lg">
-//             <h1 className="text-sm font-bold text-[#515151] ">Jadwal Pertemuan yang akan datang</h1>
-//             <div className="mt-3 py-2 px-3 rounded-md bg-[#F25555] text-primary-white">
-//               <span className="text-xs text-[#F1F1F1]">27 jan </span>
-//               <span className="ml-2 text-sm"> Pembahasan Scrum</span>
-//             </div>
-//             <div className="mt-3 py-2 px-3 rounded-md bg-[#1DADFE] text-primary-white">
-//               <span className="text-xs text-[#F1F1F1]">29 jan</span>
-//               <span className="ml-2 text-sm">Rencana Tim</span>
-//             </div>
-//             <div className="mt-3 py-2 px-3 rounded-md bg-[#05D24B] text-primary-white">
-//               <span className="text-xs text-[#F1F1F1]">31 jan </span>
-//               <span className="ml-2 text-sm"> Perencanaan Desain Proyek</span>
-//             </div>
-//           </div>
-//         </div>
-//         {/* <div className="grid lg:grid-cols-2 gap-4 lg:gap-8">
-//           <div className="grid lg:grid-cols-2 gap-4">
-//             <div className="rounded-md bg-primary-white lg:w-[560px] flex items-center justify-center shadow-lg">
-//               <Barchart />
-//             </div>
-//             <div className="rounded-md bg-primary-white flex items-center lg:w-[305px] justify-center shadow-lg lg:ml-72">02</div>
-//             <div className="rounded-md bg-primary-white lg:w-[560px] flex items-center justify-center shadow-lg">01</div>
-//             <div className="rounded-md bg-primary-white flex items-center lg:w-[305px] justify-center shadow-lg lg:ml-72">02</div>
-//           </div>
-//           <div className="rounded-md bg-primary-white flex items-center justify-center shadow-lg lg:ml-[305px] lg:w-[270px]">05</div>
-//         </div> */}
-//       </div>
-//     </>
-//   );
-// }

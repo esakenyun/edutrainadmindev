@@ -131,35 +131,38 @@ export default function WorkshopCard() {
   return (
     <div>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-        {currentPageData.map((workshop) => (
-          <div key={workshop.id} className="bg-primary-white rounded-xl shadow-2xl hover:scale-105">
-            {workshop.isNew && <div className="absolute bg-warm-redtomato py-2 px-3 text-xs text-primary-white font-medium rounded-tl-lg rounded-br-lg">Baru</div>}
-            <Image src={workshop.banner} quality={100} width={500} height={500} className="w-full h-auto rounded-t-lg" alt={workshop.title} priority />
-            <div className="py-3 px-3 text-black">
-              <div className="py-2">
-                <h1 className="text-lg font-bold">{workshop.title}</h1>
-                {/* <div className="flex items-center justify-between">
+        {currentPageData.map((workshop) => {
+          const isPastEvent = new Date(workshop.endTime) < new Date();
+          return (
+            <div key={workshop.id} className="bg-primary-white rounded-xl shadow-2xl hover:scale-105">
+              {workshop.isNew && <div className="absolute bg-warm-redtomato py-2 px-3 text-xs text-primary-white font-medium rounded-tl-lg rounded-br-lg">Baru</div>}
+              <Image src={workshop.banner} quality={100} width={500} height={500} className={`w-full h-auto rounded-t-lg ${isPastEvent ? "grayscale" : ""}`} alt={workshop.title} priority />
+              <div className="py-3 px-3 text-black">
+                <div className="py-2">
+                  <h1 className="text-lg font-bold">{workshop.title}</h1>
+                  {/* <div className="flex items-center justify-between">
                   <p className="text-xs line-through font-medium">{workshop.originalPrice}</p>
                   <div className="text-xs py-1.5 px-2 bg-warm-redtomato text-primary-white rounded-lg">{workshop.discount}</div>
                 </div> */}
-                <div className="mt-2 flex justify-between">
-                  <p className="font-bold">{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(workshop.lastWorkshopHistory.price)}</p>
-                  <div className="flex items-center gap-2">
-                    <BiSolidShoppingBags className="text-xl" />
-                    <p className="text-xs">{workshop.soldCount} 51 terjual / Dummy</p>
+                  <div className="mt-2 flex justify-between">
+                    <p className="font-bold">{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(workshop.lastWorkshopHistory.price)}</p>
+                    <div className="flex items-center gap-2">
+                      <BiSolidShoppingBags className="text-xl" />
+                      <p className="text-xs">{workshop.soldCount} 51 terjual / Dummy</p>
+                    </div>
+                  </div>
+                  <div className="mt-2 flex justify-between font-medium">
+                    <p className="text-sm">{workshop.status}</p>
+                    {workshop.certificate ? <p className="text-sm">Sertifikat</p> : <p className="text-sm">Tanpa Sertifikat</p>}
                   </div>
                 </div>
-                <div className="mt-2 flex justify-between font-medium">
-                  <p className="text-sm">{workshop.status}</p>
-                  {workshop.certificate ? <p className="text-sm">Sertifikat</p> : <p className="text-sm">Tanpa Sertifikat</p>}
-                </div>
+                <Link href={`/dashboard/workshop/detail/${workshop.id}`} className="py-2 px-2 w-full flex items-center justify-center font-bold rounded-md text-primary-white bg-primary-blue">
+                  Lihat Rincian
+                </Link>
               </div>
-              <Link href={`/dashboard/workshop/detail/${workshop.id}`} className="py-2 px-2 w-full flex items-center justify-center font-bold rounded-md text-primary-white bg-primary-blue">
-                Lihat Rincian
-              </Link>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {shouldRenderPagination && (
         <div className="pt-16">
