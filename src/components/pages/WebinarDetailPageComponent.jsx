@@ -8,8 +8,23 @@ import SuccessModal from "@/components/modal/SuccessModal";
 import DeleteModal from "@/components/modal/DeleteModal";
 import FormEditModalWebinar from "@/components/modal/FormEditModalWebinar";
 import Image from "next/image";
+import RegisteredWebinarTable from "../table/RegisteredWebinarTable";
+
+function formatTime12Hour(dateTimeString) {
+  const date = new Date(dateTimeString);
+  date.setHours(date.getHours() - 7);
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // Handle midnight (0 hours)
+  const formattedTime = hours.toString().padStart(2, "0") + ":" + minutes + " " + ampm;
+  return formattedTime;
+}
+
 export default function WebinarDetailPageComponent({ props }) {
   const webinarData = props.webinarData;
+  const webinarId = props.webinarId;
 
   const openModal = props.openModal;
   const isModalOpen = props.isModalOpen;
@@ -44,7 +59,7 @@ export default function WebinarDetailPageComponent({ props }) {
                 <div className="flex gap-2 items-center">
                   <LuAlarmClock className="text-xl" />
                   <p className="text-sm">
-                    {new Date(webinarData.startTime).toLocaleTimeString()} - {new Date(webinarData.endTime).toLocaleTimeString()}
+                    {formatTime12Hour(webinarData.startTime)} - {formatTime12Hour(webinarData.endTime)}
                   </p>
                 </div>
                 <div className="flex gap-2 items-center">
@@ -68,7 +83,6 @@ export default function WebinarDetailPageComponent({ props }) {
                   <BsPencil />
                   Ubah
                 </button>
-                {/* {console.log(webinarData)} */}
                 {!webinarData ? <></> : <FormEditModalWebinar currentData={webinarData} isOpen={isModalOpen} onClose={closeModal} />}
 
                 <button onClick={onHandleClickHapus} className="flex items-center gap-3 text-primary-white py-2 px-[35px] bg-warm-redtomato rounded-lg">
@@ -92,6 +106,7 @@ export default function WebinarDetailPageComponent({ props }) {
         <div className="py-6">
           <p className="font-medium">{webinarData.description}</p>
         </div>
+        <RegisteredWebinarTable id={webinarId} />
       </div>
     </div>
   );

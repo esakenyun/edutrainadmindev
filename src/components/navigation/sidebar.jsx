@@ -64,7 +64,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
       </div>
       <div className="flex justify-center">
         <Link href="/dashboard">
-          <Image src="/logo.png" quality={100} height={500} width={500} alt="Company Logo" className="w-40 h-40" priority />
+          <Image src="/admin/logo.png" quality={100} height={500} width={500} alt="Company Logo" className="w-40 h-40" priority />
           {/* <p className="text-center font-bold text-white">Admin EDUTRAIN</p> */}
         </Link>
       </div>

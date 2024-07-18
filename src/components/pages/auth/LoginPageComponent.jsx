@@ -57,7 +57,7 @@ export default function LoginPageComponent({ props }) {
           </form>
         </div>
         <div className="px-16 py-32 justify-center items-center bg-white hidden lg:flex">
-          <Image src={"/bg_auth.jpg"} alt="Background Auth Admin" width={400} height={400} priority />
+          <Image src={"/admin/bg_auth.jpg"} alt="Background Auth Admin" width={400} height={400} priority />
         </div>
       </div>
       <div className="absolute justify-center items-center">

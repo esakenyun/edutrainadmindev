@@ -28,6 +28,19 @@ export async function handleFetchDetailWebinarData(id) {
   }
 }
 
+export async function handleFetchRegisteredWebinarUsers(id) {
+  try {
+    const token = Cookies.get("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}/registered-users`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching training data:", error);
+  }
+}
+
 export async function handleAddWebinar(formDataWebinar) {
   try {
     const token = Cookies.get("token");

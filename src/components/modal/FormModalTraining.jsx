@@ -187,7 +187,7 @@ export default function FormModalTraining({ isOpen, onClose }) {
     <Modal open={isOpen} onClose={onClose}>
       <form method="POST" encType="multipart/form-data">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 bg-primary-blue rounded-md shadow-md">
-          <h2 className="text-xl font-bold mb-4 text-white">Tambah Training</h2>
+          <h2 className="text-xl font-bold mb-4 text-primary-white">Tambah Training</h2>
 
           {activePage === 1 && <Page1 formData={formData} handleChange={handleChange} handleChangeShowPrice={handleChangeShowPrice} />}
           {activePage === 2 && <Page2 formData={formData} handleChange={handleChange} />}

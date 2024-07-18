@@ -1,6 +1,8 @@
-import { handleFetchRegisteredTrainingUsers } from "@/helpers/trainingHelper";
+import { handleFetchRegisteredWorkshopUsers } from "@/helpers/workshopHelper";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+
+// const USERS_PER_PAGE = 10;
 
 function convertToWIB(dateString) {
   const date = new Date(dateString);
@@ -38,7 +40,7 @@ function convertToWIB(dateString) {
   return `${formattedDay}-${formattedMonth}-${wibYear} ${formattedHours}:${formattedMinutes} WIB`;
 }
 
-export default function RegisteredTrainingTable({ id }) {
+export default function RegisteredWorkshopTable({ id }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [registeredUser, setRegisteredUser] = useState([]);
@@ -56,7 +58,8 @@ export default function RegisteredTrainingTable({ id }) {
   };
 
   const fetchAllDataUserTraining = async () => {
-    const response = await handleFetchRegisteredTrainingUsers(id);
+    const response = await handleFetchRegisteredWorkshopUsers(id);
+    console.log(response);
     setRegisteredUser(response);
     setLoading(false);
   };
@@ -70,11 +73,12 @@ export default function RegisteredTrainingTable({ id }) {
   }
 
   if (!registeredUser || registeredUser.length === 0) {
-    return <div className=" pt-20 text-secondary-grey">Tidak Ada Peserta Training</div>;
+    return <div className=" pt-20 text-secondary-grey">Tidak Ada Peserta Workshop</div>;
   }
 
   const offset = currentPage * usersPerPage;
   const filteredUsers = registeredUser.filter((user) => user.fullname.toLowerCase().includes(searchTerm.toLowerCase()));
+  // const currentUsers = registeredUser.slice(offset, offset + USERS_PER_PAGE);
   const currentUsers = filteredUsers.slice(offset, offset + usersPerPage);
 
   return (
@@ -88,7 +92,7 @@ export default function RegisteredTrainingTable({ id }) {
               <p className="text-sm">Urutkan Berdasarkan : </p>
               <select name="filterUser" id="filterUser" className="text-sm bg-secondary-lightmedium rounded-lg">
                 <option value="nama">Nama</option>
-                <option value="instansi">Instansi</option>
+                <option value="nama">Instansi</option>
               </select>
             </div>
             <div className="flex items-center justify-center pt-3">
@@ -98,12 +102,12 @@ export default function RegisteredTrainingTable({ id }) {
         </div>
         <div className="flex justify-between items-center mb-4">
           <div>
-            <label htmlFor="entries" className="mr-2">
+            <label htmlFor="entires" className="mr-2">
               Show
             </label>
             <select id="entries" className="border rounded text-sm p-1" value={usersPerPage === Number.MAX_SAFE_INTEGER ? "all" : usersPerPage} onChange={handleRowsChange}>
               <option value="all">All</option>
-              <option value={10}>10</option>
+              <option value={1}>1</option>
               <option value={25}>25</option>
               <option value={50}>50</option>
               <option value={100}>100</option>
@@ -113,7 +117,7 @@ export default function RegisteredTrainingTable({ id }) {
             </label>
           </div>
           <div>
-            <input type="text" placeholder="Cari Peserta Training..." className="border rounded-md p-2 outline-none focus:border-primary-blue placeholder:text-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder="Cari Peserta Workshop..." className="border rounded-md p-2 outline-none focus:border-primary-blue placeholder:text-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
         </div>
         <div className="overflow-x-auto">

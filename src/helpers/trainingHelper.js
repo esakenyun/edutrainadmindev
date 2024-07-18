@@ -36,7 +36,7 @@ export async function handleFetchRegisteredTrainingUsers(id) {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL_DEV + `/api/trainings-registered/${id}`);
+    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/registered-users`);
     return response.data.data;
   } catch (error) {
     console.error("Error fetching training data:", error);

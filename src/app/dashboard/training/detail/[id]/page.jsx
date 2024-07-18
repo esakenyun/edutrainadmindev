@@ -106,7 +106,7 @@ export default function TrainingDetail({ params }) {
 
   const handleCloseModalSuccess = () => {
     setOpenModalSuccess(false);
-    router.push("/admin/dashboard/training");
+    router.push("/dashboard/training");
   };
 
   useEffect(() => {
@@ -137,7 +137,7 @@ export default function TrainingDetail({ params }) {
   if (!trainingData) {
     return (
       <div className="pt-28">
-        <LoadingAnimation />;
+        <LoadingAnimation />
       </div>
     );
   }

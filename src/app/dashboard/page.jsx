@@ -91,23 +91,23 @@ const Kemarin = () => (
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
         <div className="mt-2 flex flex-col gap-3 px-3">
           <div className="flex gap-2 bg-warm-red items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-orange items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-yellow items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-blue items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-green items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
         </div>
@@ -120,35 +120,35 @@ const Kemarin = () => (
         <div className="mt-6 flex flex-col gap-5 px-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
+              <Image src="/admin/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
               <p className="text-sm">Jawa Barat</p>
             </div>
             <p className="text-sm">43%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
+              <Image src="/admin/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
               <p className="text-sm">DKI Jakarta</p>
             </div>
             <p className="text-sm">20%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
+              <Image src="/admin/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
               <p className="text-sm">Jawa Tengah</p>
             </div>
             <p className="text-sm">12%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
+              <Image src="/admin/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
               <p className="text-sm">Jawa Timur</p>
             </div>
             <p className="text-sm">10%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
+              <Image src="/admin/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
               <p className="text-sm">Banten</p>
             </div>
             <p className="text-sm">10%</p>
@@ -269,23 +269,23 @@ const TujuhHari = () => (
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
         <div className="mt-2 flex flex-col gap-3 px-3">
           <div className="flex gap-2 bg-warm-red items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-orange items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-yellow items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-blue items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-green items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
         </div>
@@ -298,35 +298,35 @@ const TujuhHari = () => (
         <div className="mt-6 flex flex-col gap-5 px-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojabar.png" width={40} height={35} className="w-auto" alt="logojabar" priority />
+              <Image src="/admin/logojabar.png" width={40} height={35} className="w-auto" alt="logojabar" priority />
               <p className="text-sm">Jawa Barat</p>
             </div>
             <p className="text-sm">43%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
+              <Image src="/admin/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
               <p className="text-sm">DKI Jakarta</p>
             </div>
             <p className="text-sm">20%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
+              <Image src="/admin/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
               <p className="text-sm">Jawa Tengah</p>
             </div>
             <p className="text-sm">12%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
+              <Image src="/admin/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
               <p className="text-sm">Jawa Timur</p>
             </div>
             <p className="text-sm">10%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
+              <Image src="/admin/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
               <p className="text-sm">Banten</p>
             </div>
             <p className="text-sm">10%</p>
@@ -447,23 +447,23 @@ const TigaPuluh = () => (
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
         <div className="mt-2 flex flex-col gap-3 px-3">
           <div className="flex gap-2 bg-warm-red items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-orange items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-yellow items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-blue items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-green items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
         </div>
@@ -476,35 +476,35 @@ const TigaPuluh = () => (
         <div className="mt-6 flex flex-col gap-5 px-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
+              <Image src="/admin/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
               <p className="text-sm">Jawa Barat</p>
             </div>
             <p className="text-sm">43%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
+              <Image src="/admin/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
               <p className="text-sm">DKI Jakarta</p>
             </div>
             <p className="text-sm">20%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
+              <Image src="/admin/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
               <p className="text-sm">Jawa Tengah</p>
             </div>
             <p className="text-sm">12%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
+              <Image src="/admin/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
               <p className="text-sm">Jawa Timur</p>
             </div>
             <p className="text-sm">10%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
+              <Image src="/admin/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
               <p className="text-sm">Banten</p>
             </div>
             <p className="text-sm">10%</p>
@@ -625,23 +625,23 @@ const DuaBelasBulan = () => (
         <p className="font-bold text-center">Instansi Langganan Teratas</p>
         <div className="mt-2 flex flex-col gap-3 px-3">
           <div className="flex gap-2 bg-warm-red items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-orange items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-warm-yellow items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-blue items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
           <div className="flex gap-2 bg-primary-green items-center px-3 py-1 rounded-lg">
-            <Image src="/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
+            <Image src="/admin/logouin.png" width={40} height={10} className="w-auto" alt="logouin" priority />
             <p className="text-xs font-bold text-white">UIN Sunan Gunung Djati Bandung</p>
           </div>
         </div>
@@ -654,35 +654,35 @@ const DuaBelasBulan = () => (
         <div className="mt-6 flex flex-col gap-5 px-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
+              <Image src="/admin/logojabar.png" width={30} height={35} className="w-auto" alt="logojabar" priority />
               <p className="text-sm">Jawa Barat</p>
             </div>
             <p className="text-sm">43%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
+              <Image src="/admin/logodki.png" width={40} height={35} className="w-auto" alt="logodki" priority />
               <p className="text-sm">DKI Jakarta</p>
             </div>
             <p className="text-sm">20%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
+              <Image src="/admin/logojateng.png" width={40} height={35} className="w-auto" alt="logojateng" priority />
               <p className="text-sm">Jawa Tengah</p>
             </div>
             <p className="text-sm">12%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
+              <Image src="/admin/logojatim.png" width={40} height={35} className="w-auto" alt="logojatim" priority />
               <p className="text-sm">Jawa Timur</p>
             </div>
             <p className="text-sm">10%</p>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-5 items-center">
-              <Image src="/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
+              <Image src="/admin/logobanten.png" width={40} height={35} className="w-auto" alt="logobanten" priority />
               <p className="text-sm">Banten</p>
             </div>
             <p className="text-sm">10%</p>

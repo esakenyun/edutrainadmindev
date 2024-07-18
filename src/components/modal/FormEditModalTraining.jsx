@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, TextField, TextareaAutosize } from "@mui/material";
+import { Button, Modal } from "@mui/material";
 import axios from "axios";
 import Cookies from "js-cookie";
 import InputCategoryCreatable from "../input/InputCategoryCreatable";
@@ -21,14 +21,28 @@ function formatDateTimeForInput(dateTimeString) {
 
 const Page1 = ({ formData, trainingData, handleChange, handleChangeShowPrice }) => (
   <>
-    <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("title")} value={formData.title} />
-    <label htmlFor="description">Description</label>
-    <TextareaAutosize maxRows={3} placeholder="Description" name="description" className="border border-gray-300 rounded-md p-2 w-full border-collapse" onChange={handleChange("description")} value={formData.description} />
-    <label htmlFor="description">Syllabus</label>
-    <TextareaAutosize maxRows={3} placeholder="Syllabus" name="syllabus" className="border border-gray-300 rounded-md p-2 w-full border-collapse mb-2" onChange={handleChange("syllabus")} value={formData.syllabus} />
-    <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("price")} defaultValue={trainingData.lastTrainingHistory.price} />
+    <label htmlFor="title" className="text-primary-white">
+      Title
+    </label>
+    <input type="text" name="title" id="title" className="text-black w-full py-3 px-2 rounded-md outline-none mb-0.5" onChange={handleChange("title")} value={formData.title} />
+    {/* <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("title")} value={formData.title} /> */}
+    <label htmlFor="description" className="text-primary-white">
+      Description
+    </label>
+    <textarea name="description" id="description" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-0.5" onChange={handleChange("description")} value={formData.description} required></textarea>
+    {/* <TextareaAutosize maxRows={3} placeholder="Description" name="description" className="border border-gray-300 rounded-md p-2 w-full border-collapse" onChange={handleChange("description")} value={formData.description} /> */}
+    <label htmlFor="syllabus" className="text-primary-white">
+      Syllabus
+    </label>
+    <textarea name="syllabus" id="syllabus" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-0.5" onChange={handleChange("syllabus")} value={formData.syllabus} required></textarea>
+    {/* <TextareaAutosize maxRows={3} placeholder="Syllabus" name="syllabus" className="border border-gray-300 rounded-md p-2 w-full border-collapse mb-2" onChange={handleChange("syllabus")} value={formData.syllabus} /> */}
+    <label htmlFor="price" className="text-primary-white">
+      Price
+    </label>
+    <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={trainingData.lastTrainingHistory.price} />
+    {/* <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("price")} defaultValue={trainingData.lastTrainingHistory.price} /> */}
     <div className="w-fit bg-white py-2 flex gap-3 items-center mt-3 p-2 rounded-md">
-      <label htmlFor="showPrice" className="text-secondary-grey">
+      <label htmlFor="showPrice" className="text-primary-darkblue">
         Show Price
       </label>
       <input type="checkbox" name="showPriceInput" id="ShowPriceInput" className="h-4 w-4" onChange={handleChangeShowPrice("showPrice")} checked={formData.showPrice} />
@@ -38,19 +52,19 @@ const Page1 = ({ formData, trainingData, handleChange, handleChangeShowPrice }) 
 
 const Page2 = ({ formData, trainingData, handleChange }) => (
   <>
-    <label htmlFor="Date">Start Time</label>
-    <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(trainingData?.startTime)} />
-    <label htmlFor="Date">End Time</label>
-    <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(trainingData?.endTime)} />
-    <InputCategoryCreatable
-      inputSize="small"
-      className="mb-4 w-full"
-      selectedCategories={formData.category}
-      onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })}
-    />
+    <label htmlFor="startTime" className="text-primary-white">
+      Start Time
+    </label>
+    <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(trainingData?.startTime)} />
+    {/* <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(trainingData?.startTime)} /> */}
+    <label htmlFor="endTime" className="text-primary-white">
+      End Time
+    </label>
+    <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(trainingData?.endTime)} />
+    {/* <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(trainingData?.endTime)} /> */}
+    <InputCategoryCreatable inputSize="small" selectedCategories={formData.category} onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })} />
     <InputSubCategoryCreatable
       inputSize="small"
-      className="w-full"
       selectedSubCategories={formData.subCategory}
       onSelectSubCategories={(selectedSubCategory) => handleChange("subCategoryName")({ target: { value: selectedSubCategory ? selectedSubCategory.name : "" } })}
     />
@@ -89,9 +103,12 @@ const Page3 = ({ formData, trainingData, handleChange, setBannerFile }) => (
       onChange={handleChange("discount")}
       required
     />
-    <TextField type="number" label="Discount" name="discount" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("discount")} defaultValue={trainingData.lastTrainingHistory.discount} />
-    <label htmlFor="Banner">Banner</label>
-    <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} />
+    {/* <TextField type="number" label="Discount" name="discount" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("discount")} defaultValue={trainingData.lastTrainingHistory.discount} /> */}
+    <label htmlFor="Banner" className="text-primary-white">
+      Banner (280 x 160)
+    </label>
+    <input type="file" accept="image/*" name="banner" className="w-full bg-primary-white py-3 px-2 rounded-md" onChange={(e) => setBannerFile(e.target.files[0])} />
+    {/* <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} /> */}
   </>
 );
 
@@ -199,8 +216,8 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
   return (
     <Modal open={isOpen} onClose={onClose}>
       <form method="POST" encType="multipart/form-data">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 bg-primary-white rounded-md shadow-md">
-          <h2 className="text-xl font-bold mb-4">Ubah Training</h2>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 bg-primary-blue rounded-md shadow-md">
+          <h2 className="text-xl font-bold mb-4 text-primary-white">Ubah Training</h2>
 
           {activePage === 1 && <Page1 formData={formData} handleChange={handleChange} handleChangeShowPrice={handleChangeShowPrice} trainingData={trainingData} />}
           {activePage === 2 && <Page2 formData={formData} handleChange={handleChange} trainingData={trainingData} />}
@@ -208,7 +225,7 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
 
           <div className="flex justify-between mt-4">
             {activePage > 1 && (
-              <Button variant="outlined" color="primary" onClick={handlePrev}>
+              <Button variant="outlined" color="inherit" onClick={handlePrev}>
                 Back
               </Button>
             )}

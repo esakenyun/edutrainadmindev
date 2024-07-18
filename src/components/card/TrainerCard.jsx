@@ -13,7 +13,7 @@ const TrainerInfoCard = ({ id, email, fullname, username, phone, isOpen, toggleD
     <div className="relative">
       <div className="flex flex-col items-center gap-4 rounded-xl bg-primary-white shadow-lg py-5">
         <div className="flex items-center relative">
-          <Image src="/noavatar.png" width={70} height={70} className="rounded-3xl w-auto h-auto border border-collapse border-black" alt="Admin Avatar" priority />
+          <Image src="/admin/noavatar.png" width={70} height={70} className="rounded-3xl w-auto h-auto border border-collapse border-black" alt="Admin Avatar" priority />
           <IoMdMore className="absolute text-3xl mb-16 ml-32 text-secondary-grey cursor-pointer" onClick={() => toggleDropdown(id)} />
         </div>
         <div className="flex flex-col items-center">

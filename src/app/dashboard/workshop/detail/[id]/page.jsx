@@ -39,7 +39,7 @@ export default function WorkshopDetail({ params }) {
 
   const handleCloseModalSuccess = () => {
     setOpenModalSuccess(false);
-    router.push("/admin/dashboard/workshop");
+    router.push("/dashboard/workshop");
   };
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function WorkshopDetail({ params }) {
   if (!workshopData) {
     return (
       <div className="pt-28">
-        <LoadingAnimation />;
+        <LoadingAnimation />
       </div>
     );
   }
@@ -67,6 +67,7 @@ export default function WorkshopDetail({ params }) {
     <WorkshopDetailPageComponent
       props={{
         workshopData: workshopData,
+        workshopId: params.id,
         openModal: openModal,
         isModalOpen: isModalOpen,
         closeModal: closeModal,

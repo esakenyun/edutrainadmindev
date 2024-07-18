@@ -5,7 +5,7 @@ export async function middleware(request) {
     const bearerToken = request.cookies.get("token");
 
     if (!bearerToken) {
-      return NextResponse.redirect(new URL("/auth", request.url));
+      return NextResponse.redirect(new URL("/admin/auth", request.url));
     }
 
     const serverResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/validate-token", {
@@ -22,7 +22,7 @@ export async function middleware(request) {
     if (serverResponse.status === 200) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL("/auth", request.url));
+      return NextResponse.redirect(new URL("/admin/auth", request.url));
     }
     // if (bearerToken) {
     //   return NextResponse.next();
@@ -31,7 +31,7 @@ export async function middleware(request) {
     // }
   } catch (err) {
     console.log(err.message);
-    return NextResponse.redirect(new URL("/auth", request.url));
+    return NextResponse.redirect(new URL("/admin/auth", request.url));
   }
 }
 

@@ -29,7 +29,7 @@ const columns = [
     editable: false,
     renderCell: (params) => (
       <div className="mt-2">
-        <Image src="/avatar.png" width={30} height={30} className=" w-auto h-auto rounded-full" alt="profileImg" />
+        <Image src="/admin/avatar.png" width={30} height={30} className=" w-auto h-auto rounded-full" alt="profileImg" />
       </div>
     ),
   },

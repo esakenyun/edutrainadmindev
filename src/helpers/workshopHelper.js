@@ -20,6 +20,19 @@ export async function handleFetchDetailWorkshopData(id) {
   }
 }
 
+export async function handleFetchRegisteredWorkshopUsers(id) {
+  try {
+    const token = Cookies.get("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/workshops/${id}/registered-users`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching training data:", error);
+  }
+}
+
 export async function handleAddWorkshop(formDataWorkshop) {
   try {
     const token = Cookies.get("token");

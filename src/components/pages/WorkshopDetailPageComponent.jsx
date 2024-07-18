@@ -7,9 +7,11 @@ import DeleteModal from "@/components/modal/DeleteModal";
 import SuccessModal from "@/components/modal/SuccessModal";
 import FormEditModalWorkshop from "../modal/FormEditModalWorkshop";
 import Image from "next/image";
+import RegisteredWorkshopTable from "../table/RegisteredWorkshopTable";
 
 export default function WorkshopDetailPageComponent({ props }) {
   const workshopData = props.workshopData;
+  const workshopId = props.workshopId;
 
   const openModal = props.openModal;
   const isModalOpen = props.isModalOpen;
@@ -89,6 +91,8 @@ export default function WorkshopDetailPageComponent({ props }) {
         <div className="py-6">
           <p className="font-medium">{workshopData.description}</p>
         </div>
+        {console.log(workshopId)}
+        <RegisteredWorkshopTable id={workshopId} />
       </div>
     </div>
   );

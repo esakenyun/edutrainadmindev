@@ -46,7 +46,7 @@ export default function WebinarDetail({ params }) {
 
   const handleCloseModalSuccess = () => {
     setOpenModalSuccess(false);
-    router.push("/admin/dashboard/webinar");
+    router.push("/dashboard/webinar");
   };
 
   useEffect(() => {
@@ -69,10 +69,12 @@ export default function WebinarDetail({ params }) {
       </div>
     );
   }
+
   return (
     <WebinarDetailPageComponent
       props={{
         webinarData: webinarData,
+        webinarId: params.id,
         openModal: openModal,
         isModalOpen: isModalOpen,
         closeModal: closeModal,
