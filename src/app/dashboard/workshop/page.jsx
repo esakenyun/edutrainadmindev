@@ -1,5 +1,6 @@
 "use client";
-import WorkshopPageComponent from "@/components/pages/WorkshopPageComponent";
+
+import WorkshopPageComponent from "@/components/pages/workshop/WorkshopPageComponent";
 import { useState } from "react";
 
 export default function Workshop() {

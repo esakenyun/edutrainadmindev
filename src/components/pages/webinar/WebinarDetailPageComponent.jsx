@@ -8,7 +8,7 @@ import SuccessModal from "@/components/modal/SuccessModal";
 import DeleteModal from "@/components/modal/DeleteModal";
 import FormEditModalWebinar from "@/components/modal/FormEditModalWebinar";
 import Image from "next/image";
-import RegisteredWebinarTable from "../table/RegisteredWebinarTable";
+import RegisteredWebinarTable from "../../table/RegisteredWebinarTable";
 
 function formatTime12Hour(dateTimeString) {
   const date = new Date(dateTimeString);

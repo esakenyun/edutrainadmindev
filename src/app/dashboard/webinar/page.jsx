@@ -1,5 +1,6 @@
 "use client";
-import WebinarPageComponent from "@/components/pages/WebinarPageComponent";
+
+import WebinarPageComponent from "@/components/pages/webinar/WebinarPageComponent";
 import { useState } from "react";
 
 export default function Webinar() {

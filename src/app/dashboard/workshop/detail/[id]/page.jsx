@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import WorkshopDetailPageComponent from "@/components/pages/WorkshopDetailPageComponent";
+import WorkshopDetailPageComponent from "@/components/pages/workshop/WorkshopDetailPageComponent";
 import { handleDeleteWorkshop, handleFetchDetailWorkshopData, handleOpenModalDetailWorkshop } from "@/helpers/workshopHelper";
 import LoadingAnimation from "@/components/loading/LoadingAnimation";
 

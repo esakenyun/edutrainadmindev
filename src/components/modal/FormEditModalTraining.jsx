@@ -25,22 +25,18 @@ const Page1 = ({ formData, trainingData, handleChange, handleChangeShowPrice }) 
       Title
     </label>
     <input type="text" name="title" id="title" className="text-black w-full py-3 px-2 rounded-md outline-none mb-0.5" onChange={handleChange("title")} value={formData.title} />
-    {/* <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("title")} value={formData.title} /> */}
     <label htmlFor="description" className="text-primary-white">
       Description
     </label>
     <textarea name="description" id="description" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-0.5" onChange={handleChange("description")} value={formData.description} required></textarea>
-    {/* <TextareaAutosize maxRows={3} placeholder="Description" name="description" className="border border-gray-300 rounded-md p-2 w-full border-collapse" onChange={handleChange("description")} value={formData.description} /> */}
     <label htmlFor="syllabus" className="text-primary-white">
       Syllabus
     </label>
     <textarea name="syllabus" id="syllabus" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-0.5" onChange={handleChange("syllabus")} value={formData.syllabus} required></textarea>
-    {/* <TextareaAutosize maxRows={3} placeholder="Syllabus" name="syllabus" className="border border-gray-300 rounded-md p-2 w-full border-collapse mb-2" onChange={handleChange("syllabus")} value={formData.syllabus} /> */}
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
-    <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={trainingData.lastTrainingHistory.price} />
-    {/* <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("price")} defaultValue={trainingData.lastTrainingHistory.price} /> */}
+    <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={trainingData?.lastTrainingHistory?.price} />
     <div className="w-fit bg-white py-2 flex gap-3 items-center mt-3 p-2 rounded-md">
       <label htmlFor="showPrice" className="text-primary-darkblue">
         Show Price
@@ -56,12 +52,10 @@ const Page2 = ({ formData, trainingData, handleChange }) => (
       Start Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(trainingData?.startTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(trainingData?.startTime)} /> */}
     <label htmlFor="endTime" className="text-primary-white">
       End Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(trainingData?.endTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(trainingData?.endTime)} /> */}
     <InputCategoryCreatable inputSize="small" selectedCategories={formData.category} onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })} />
     <InputSubCategoryCreatable
       inputSize="small"
@@ -73,23 +67,6 @@ const Page2 = ({ formData, trainingData, handleChange }) => (
 
 const Page3 = ({ formData, trainingData, handleChange, setBannerFile }) => (
   <>
-    {/* <TextField label="Participants" margin="normal" name="maxAttendees" type="number" size="small" className="w-full mb-4" value={formData.maxAttendees} onChange={handleChange("maxAttendees")} />
-    <FormControl className="w-full mb-4">
-      <InputLabel id="eventstatus-select-label">Event Status</InputLabel>
-      <Select labelId="eventstatus-select-label" id="eventstatus-select" value={formData.eventStatus} label="Event Status" onChange={handleChange("eventStatus")}>
-        <MenuItem value="OFFLINE">Offline</MenuItem>
-        <MenuItem value="ONLINE">Online</MenuItem>
-      </Select>
-    </FormControl> */}
-    {/* <div className="my-2">
-      <FormControl className="w-full">
-        <InputLabel id="certificate-select-label">Certificate</InputLabel>
-        <Select labelId="certificate-select-label" id="certificate-select" value={formData.certificate} label="Certificate" onChange={handleChange("certificate")}>
-          <MenuItem value="Sertifikat">Sertifikat</MenuItem>
-          <MenuItem value="Tanpa Sertifikat">Tanpa Sertifikat</MenuItem>
-        </Select>
-      </FormControl>
-    </div> */}
     <label htmlFor="discount" className="text-primary-white">
       Discount (0-100%)
     </label>
@@ -99,23 +76,20 @@ const Page3 = ({ formData, trainingData, handleChange, setBannerFile }) => (
       placeholder="Discount"
       className="w-full mb-4 py-3 px-2 rounded-md border-[1px] border-black"
       value={formData.discount}
-      defaultValue={trainingData.lastTrainingHistory.discount}
+      defaultValue={trainingData?.lastTrainingHistory?.discount}
       onChange={handleChange("discount")}
       required
     />
-    {/* <TextField type="number" label="Discount" name="discount" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("discount")} defaultValue={trainingData.lastTrainingHistory.discount} /> */}
     <label htmlFor="Banner" className="text-primary-white">
       Banner (280 x 160)
     </label>
     <input type="file" accept="image/*" name="banner" className="w-full bg-primary-white py-3 px-2 rounded-md" onChange={(e) => setBannerFile(e.target.files[0])} />
-    {/* <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} /> */}
   </>
 );
 
 export default function FormEditModalTraining({ currentData, isOpen, onClose }) {
   useEffect(() => {
     setTrainingData(currentData);
-    // console.log(currentData);
     setFormData(currentData);
   }, [currentData, isOpen]);
 
@@ -125,17 +99,17 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    title: currentData.title,
-    description: currentData.description,
-    syllabus: currentData.syllabus,
-    startTime: currentData.startTime,
-    endTime: currentData.endTime,
-    discount: currentData.discount,
+    title: "",
+    description: "",
+    syllabus: "",
+    startTime: "",
+    endTime: "",
+    discount: "",
     // eventStatus: "",
     price: "",
-    categoryName: currentData.categoryName,
-    subCategoryName: currentData.subCategoryName,
-    showPrice: currentData.showPrice,
+    categoryName: "",
+    subCategoryName: "",
+    showPrice: "",
   });
 
   const handleChange = (field) => (e) => {
@@ -180,6 +154,16 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
   }, []);
 
   const handleSubmit = async () => {
+    if (formData.price < 0) {
+      toast.error("Price must be at least 0.");
+      return;
+    }
+
+    if (formData.discount < 0) {
+      toast.error("Discount must be at least 0.");
+      return;
+    }
+
     const formDataTraining = {
       title: formData.title,
       description: formData.description,
@@ -234,8 +218,13 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
                 Next
               </Button>
             ) : (
-              <Button variant="contained" color="primary" className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md" onClick={handleSubmit} disabled={loading}>
-                Submit
+              <Button
+                variant="contained"
+                color="primary"
+                className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md"
+                onClick={handleSubmit}
+                disabled={loading || formData.title.trim() === "" || formData.description.trim() === "" || formData.startTime.trim() === "" || formData.endTime.trim() === ""}>
+                {loading ? "Updating..." : "Update"}
               </Button>
             )}
           </div>

@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 const cairo = Cairo({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Edutrain Admin Development",
+  title: "Edutrain Admin",
 };
 
 export default function RootLayout({ children }) {

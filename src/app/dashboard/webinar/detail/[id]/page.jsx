@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import WebinarDetailPageComponent from "@/components/pages/WebinarDetailPageComponent";
+import WebinarDetailPageComponent from "@/components/pages/webinar/WebinarDetailPageComponent";
 import { handleDeleteWebinar, handleFetchDetailWebinarData, handleOpenModalDetailWebinar } from "@/helpers/webinarHelper";
 import LoadingAnimation from "@/components/loading/LoadingAnimation";
 

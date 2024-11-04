@@ -13,7 +13,6 @@ const Page1 = ({ formData, handleChange, handleChangeShowPrice }) => (
       Title
     </label>
     <input type="text" name="title" id="title" className="text-black w-full py-3 px-2 rounded-md outline-none mb-3" placeholder="Title" value={formData.title} onChange={handleChange("title")} required />
-    {/* <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" value={formData.title} onChange={handleChange("title")} /> */}
     <label htmlFor="description" className="text-primary-white">
       Description
     </label>
@@ -26,7 +25,6 @@ const Page1 = ({ formData, handleChange, handleChangeShowPrice }) => (
       value={formData.description}
       onChange={handleChange("description")}
       required></textarea>
-    {/* <TextareaAutosize minRows={3} placeholder="Description" name="description" className=" border border-gray-300 rounded-md p-2 w-full border-collapse" value={formData.description} onChange={handleChange("description")} /> */}
     <label htmlFor="Sylabus" className="text-primary-white">
       Sylabus
     </label>
@@ -35,7 +33,6 @@ const Page1 = ({ formData, handleChange, handleChangeShowPrice }) => (
       Price
     </label>
     <input type="number" name="price" id="price" className="text-black w-full py-3 px-2 rounded-md outline-none" placeholder="Price" value={formData.price} onChange={handleChange("price")} required />
-    {/* <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" value={formData.price} onChange={handleChange("price")} /> */}
     <div className="w-fit bg-white py-2 flex gap-3 items-center mt-3 p-2 rounded-md">
       <label htmlFor="showPrice" className="text-secondary-grey">
         Show Price
@@ -51,12 +48,10 @@ const Page2 = ({ formData, handleChange }) => (
       Start Time
     </label>
     <input type="datetime-local" className="w-full mb-4 py-3 px-2 rounded-md outline-none" value={formData.startTime} onChange={handleChange("startTime")} />
-    {/* <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full rounded-md" value={formData.startTime} onChange={handleChange("startTime")} sx={{ backgroundColor: "white" }} /> */}
     <label htmlFor="endTime" className="text-primary-white">
       End Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" value={formData.endTime} onChange={handleChange("endTime")} />
-    {/* <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full rounded-md" value={formData.endTime} onChange={handleChange("endTime")} sx={{ backgroundColor: "white" }} /> */}
     <InputCategoryCreatable inputSize="small" selectedCategories={formData.categoryName} onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })} />
     <InputSubCategoryCreatable
       inputSize="small"
@@ -68,23 +63,6 @@ const Page2 = ({ formData, handleChange }) => (
 
 const Page3 = ({ formData, handleChange, setBannerFile }) => (
   <>
-    {/* <TextField label="Participants" margin="normal" name="maxAttendees" type="number" size="small" className="w-full mb-4" value={formData.maxAttendees} onChange={handleChange("maxAttendees")} />
-    <FormControl className="w-full mb-4">
-      <InputLabel id="eventstatus-select-label">Event Status</InputLabel>
-      <Select labelId="eventstatus-select-label" id="eventstatus-select" value={formData.eventStatus} label="Event Status" onChange={handleChange("eventStatus")}>
-        <MenuItem value="OFFLINE">Offline</MenuItem>
-        <MenuItem value="ONLINE">Online</MenuItem>
-      </Select>
-    </FormControl> */}
-    {/* <div className="my-2">
-      <FormControl className="w-full">
-        <InputLabel id="certificate-select-label">Certificate</InputLabel>
-        <Select labelId="certificate-select-label" id="certificate-select" value={formData.certificate} label="Certificate" onChange={handleChange("certificate")}>
-          <MenuItem value="Sertifikat">Sertifikat</MenuItem>
-          <MenuItem value="Tanpa Sertifikat">Tanpa Sertifikat</MenuItem>
-        </Select>
-      </FormControl>
-    </div> */}
     <label htmlFor="Status" className="text-primary-white">
       Status
     </label>
@@ -95,15 +73,13 @@ const Page3 = ({ formData, handleChange, setBannerFile }) => (
       <option value="HYBRID">Hybrid</option>
     </select>
     <label htmlFor="Discount" className="text-primary-white">
-      Discount (0-100%)
+      Discount (0-100)%
     </label>
     <input type="number" name="discount" placeholder="Discount" className="w-full mb-4 py-3 px-2 rounded-md outline-none" value={formData.discount} onChange={handleChange("discount")} required />
-    {/* <TextField type="number" label="Discount" name="discount" margin="normal" size="small" className="mb-4 w-full rounded-md" value={formData.discount} onChange={handleChange("discount")} sx={{ backgroundColor: "white" }} /> */}
     <label htmlFor="Banner" className="text-primary-white">
       Banner : 280 x 160
     </label>
     <input type="file" accept="image/*" name="banner" className="w-full bg-primary-white  py-3 px-2 rounded-md" onChange={(e) => setBannerFile(e.target.files[0])} required />
-    {/* <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} className="h-fit" required sx={{ backgroundColor: "white" }} /> */}
   </>
 );
 
@@ -163,6 +139,20 @@ export default function FormModalTraining({ isOpen, onClose }) {
   }, []);
 
   const handleSubmit = async () => {
+    if (formData.price < 0) {
+      toast.error("Price must be at least 0.");
+      return;
+    }
+
+    if (formData.discount === undefined || formData.discount === null || formData.discount === "" || formData.discount < 0) {
+      toast.error("Discount must be at least 0.");
+      return;
+    }
+
+    if (!bannerFile) {
+      toast.error("Please upload a banner file.");
+      return;
+    }
     const formDataTraining = new FormData();
 
     for (const key in formData) {
@@ -217,7 +207,9 @@ export default function FormModalTraining({ isOpen, onClose }) {
                   formData.price.trim() === "" ||
                   formData.startTime.trim() === "" ||
                   formData.endTime.trim() === "" ||
-                  formData.categoryName.trim() === ""
+                  formData.status.trim() === "" ||
+                  formData.categoryName.trim() === "" ||
+                  formData.subCategoryName.trim() === ""
                 }>
                 Submit
               </Button>

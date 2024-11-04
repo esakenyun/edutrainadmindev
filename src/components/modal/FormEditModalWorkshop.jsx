@@ -27,16 +27,13 @@ const Page1 = ({ formData, handleChange, workshopData }) => (
       Title
     </label>
     <input type="text" name="title" id="title" className="text-black w-full py-3 px-2 rounded-md outline-none mb-3" onChange={handleChange("title")} value={formData.title} />
-    {/* <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" value={formData.title} onChange={handleChange("title")} /> */}
     <label htmlFor="description" className="text-primary-white">
       Description
     </label>
-    {/* <TextareaAutosize maxRows={3} placeholder="Description" name="description" className=" border border-gray-300 rounded-md p-2 w-full" value={formData.description} onChange={handleChange("description")} /> */}
     <textarea name="description" id="description" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-2" value={formData.description} onChange={handleChange("description")} required></textarea>
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
-    {/* <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("price")} value={formData.price} defaultValue={formData.lastWorkshopHistory.price} /> */}
     <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none mb-2" onChange={handleChange("price")} defaultValue={workshopData?.lastWorkshopHistory?.price} />
     <label htmlFor="instructor" className="text-primary-white">
       Instructor
@@ -51,12 +48,10 @@ const Page2 = ({ formData, handleChange }) => (
       Start Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(formData.startTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full" value={formatDateTimeForInput(formData.startTime)} onChange={handleChange("startTime")} /> */}
     <label htmlFor="endTime" className="text-primary-white">
       End Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(formData.endTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full" value={formatDateTimeForInput(formData.endTime)} onChange={handleChange("endTime")} /> */}
     <InputCategoryCreatable inputSize="small" selectedCategories={formData.category} onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })} />
     <InputSubCategoryCreatable
       inputSize="small"
@@ -68,27 +63,20 @@ const Page2 = ({ formData, handleChange }) => (
 
 const Page3 = ({ formData, handleChange, setBannerFile }) => (
   <>
-    {/* <TextField label="Participants" margin="normal" name="maxAttendees" type="number" size="small" className="w-full mb-4" value={formData.maxAttendees} onChange={handleChange("maxAttendees")} /> */}
     <label htmlFor="eventStatus" className="text-primary-white">
       Event Status
     </label>
     <select name="eventStatus" id="eventStatus" className="w-full py-2 px-2 rounded-md mb-2" onChange={handleChange("status")} value={formData.status}>
-      <option value="null">Select Your Event Status</option>
+      <option value="null" disabled>
+        Select Your Event Status
+      </option>
       <option value="LIVE">LIVE</option>
       <option value="PLAYBACK">Playback</option>
     </select>
-    {/* <FormControl className="w-full mb-4">
-      <InputLabel id="eventstatus-select-label">Event Status</InputLabel>
-      <Select labelId="eventstatus-select-label" id="eventstatus-select" value={formData.status} label="Event Status" onChange={handleChange("status")}>
-        <MenuItem value="LIVE">Live</MenuItem>
-        <MenuItem value="PLAYBACK">Playback</MenuItem>
-      </Select>
-    </FormControl> */}
     <label htmlFor="Banner" className="text-primary-white">
       Banner (280 x 160)
     </label>
     <input type="file" accept="image/*" name="banner" className="w-full bg-primary-white py-3 px-2 rounded-md" onChange={(e) => setBannerFile(e.target.files[0])} />
-    {/* <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} /> */}
   </>
 );
 
@@ -140,9 +128,15 @@ export default function FormEditModalWorkshop({ currentData, isOpen, onClose }) 
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
+    console.log(formData);
   }, []);
 
   const handleSubmit = async () => {
+    if (formData.price < 0) {
+      toast.error("Price must be at least 0.");
+      return;
+    }
+
     const formDataWorkshop = {
       title: formData.title,
       description: formData.description,

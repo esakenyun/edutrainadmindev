@@ -5,9 +5,9 @@ import { TiStarburstOutline } from "react-icons/ti";
 import { BsPencil } from "react-icons/bs";
 import DeleteModal from "@/components/modal/DeleteModal";
 import SuccessModal from "@/components/modal/SuccessModal";
-import FormEditModalWorkshop from "../modal/FormEditModalWorkshop";
+import FormEditModalWorkshop from "../../modal/FormEditModalWorkshop";
 import Image from "next/image";
-import RegisteredWorkshopTable from "../table/RegisteredWorkshopTable";
+import RegisteredWorkshopTable from "../../table/RegisteredWorkshopTable";
 
 export default function WorkshopDetailPageComponent({ props }) {
   const workshopData = props.workshopData;
@@ -38,9 +38,9 @@ export default function WorkshopDetailPageComponent({ props }) {
             <div className="py-5 px-5 text-secondary-dark">
               <div className="flex items-center justify-between">
                 <h1 className="font-bold text-lg md:text-xl">Rincian Workshop:</h1>
-                <div className="py-1 px-2 bg-warm-redtomato text-xs text-secondary-light rounded-lg">
+                {/* <div className="py-1 px-2 bg-warm-redtomato text-xs text-secondary-light rounded-lg">
                   <p>50% OFF</p>
-                </div>
+                </div> */}
               </div>
               <div className="py-3 flex flex-col gap-4">
                 <div className="flex gap-2 items-center">
@@ -60,7 +60,7 @@ export default function WorkshopDetailPageComponent({ props }) {
                   <p className="text-sm">{workshopData.certificate ? "Sertifikat" : "Tanpa Sertifikat"}</p>
                 </div>
               </div>
-              <p className="text-xs font-medium line-through">Rp. 200.000 / dummy</p>
+              {/* <p className="text-xs font-medium line-through">Rp. 200.000 / dummy</p> */}
               <div className="py-2">
                 <p className="font-bold">{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(workshopData.lastWorkshopHistory.price)}</p>
               </div>

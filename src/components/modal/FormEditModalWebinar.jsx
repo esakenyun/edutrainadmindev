@@ -28,17 +28,14 @@ const Page1 = ({ handleChange, webinarData, formData }) => (
       Title
     </label>
     <input type="text" name="title" id="title" className="text-black w-full py-3 px-2 rounded-md outline-none mb-3" onChange={handleChange("title")} value={formData.title} />
-    {/* <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("title")} defaultValue={webinarData?.title} /> */}
     <label htmlFor="description" className="text-primary-white">
       Description
     </label>
     <textarea name="description" id="description" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-2" value={formData.description} onChange={handleChange("description")} required></textarea>
-    {/* <TextareaAutosize maxRows={3} placeholder="Description" name="description" className=" border border-gray-300 rounded-md p-2 w-full" onChange={handleChange("description")} defaultValue={webinarData?.description} /> */}
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
     <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={webinarData?.lastWebinarHistory?.price} />
-    {/* <TextField type="number" label="Price" name="price" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("price")} defaultValue={webinarData?.lastWebinarHistory?.price} /> */}
   </>
 );
 
@@ -48,12 +45,10 @@ const Page2 = ({ formData, handleChange, webinarData }) => (
       Start Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(webinarData?.startTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="startTime" size="small" className="mb-4 w-full" onChange={handleChange("startTime")} defaultValue={formatDateTimeForInput(webinarData?.startTime)} /> */}
     <label htmlFor="endTime" className="text-primary-white">
       End Time
     </label>
     <input type="datetime-local" className="w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(webinarData?.endTime)} />
-    {/* <TextField type="datetime-local" margin="normal" name="endTime" size="small" className="mb-4 w-full" onChange={handleChange("endTime")} defaultValue={formatDateTimeForInput(webinarData?.endTime)} /> */}
     <InputCategoryCreatable inputSize="small" selectedCategories={formData.category} onSelectCategories={(selectedCategory) => handleChange("categoryName")({ target: { value: selectedCategory ? selectedCategory.name : "" } })} />
     <InputSubCategoryCreatable
       inputSize="small"
@@ -69,33 +64,25 @@ const Page3 = ({ formData, handleChange, setBannerFile, webinarData }) => (
       Participants
     </label>
     <input type="number" name="participants" id="participants" className="text-black w-full mb-2 py-3 px-2 rounded-md outline-none" onChange={handleChange("maxAttendees")} defaultValue={webinarData?.maxAttendees} />
-    {/* <TextField label="Participants" margin="normal" name="maxAttendees" type="number" size="small" className="w-full mb-4" onChange={handleChange("maxAttendees")} defaultValue={webinarData?.maxAttendees} /> */}
     <label htmlFor="eventStatus" className="text-primary-white">
       Event Status
     </label>
     <select name="eventStatus" id="eventStatus" className="w-full py-3 px-2 rounded-md mb-2" onChange={handleChange("eventStatus")} defaultValue={webinarData?.eventStatus}>
-      <option value="null">Select Your Event Status</option>
+      <option value="null" disabled>
+        Select Your Event Status
+      </option>
       <option value="OFFLINE">Offline</option>
       <option value="ONLINE">Online</option>
     </select>
-    {/* <FormControl className="w-full mb-4">
-      <InputLabel id="certificate-select-label">Event Status</InputLabel>
-      <Select labelId="certificate-select-label" id="certificate-select" label="Event Status" onChange={handleChange("eventStatus")} defaultValue={webinarData?.eventStatus}>
-        <MenuItem value="OFFLINE">Offline</MenuItem>
-        <MenuItem value="ONLINE">Online</MenuItem>
-      </Select>
-    </FormControl> */}
     <label htmlFor="Banner" className="text-primary-white">
       Banner (280 x 160)
     </label>
     <input type="file" accept="image/*" name="banner" className="w-full bg-primary-white py-3 px-2 rounded-md" onChange={(e) => setBannerFile(e.target.files[0])} />
-    {/* <TextField type="file" accept="image/*" name="banner" onChange={(e) => setBannerFile(e.target.files[0])} /> */}
   </>
 );
 
 export default function FormEditModalWebinar({ currentData, isOpen, onClose }) {
   useEffect(() => {
-    // console.log(currentData);
     setWebinarData(currentData);
     setFormData(currentData);
   }, [currentData, isOpen]);
@@ -144,6 +131,16 @@ export default function FormEditModalWebinar({ currentData, isOpen, onClose }) {
   }, []);
 
   const handleSubmit = async () => {
+    if (formData.price < 0) {
+      toast.error("Price must be at least 0.");
+      return;
+    }
+
+    if (formData.maxAttendees === undefined || formData.maxAttendees === null || formData.maxAttendees === "" || formData.maxAttendees < 0) {
+      toast.error("Participant must be at least 0.");
+      return;
+    }
+
     const formDataWebinar = {
       title: formData.title,
       description: formData.description,
@@ -159,11 +156,6 @@ export default function FormEditModalWebinar({ currentData, isOpen, onClose }) {
       banner: bannerFile,
     };
 
-    // for (const key in formData) {
-    //   formDataWebinar.append(key, formData[key]);
-    // }
-
-    // formDataWebinar.append("banner", bannerFile);
     setLoading(true);
     const response = await handleEditWebinar(currentData.id, formDataWebinar);
     setLoading(false);
