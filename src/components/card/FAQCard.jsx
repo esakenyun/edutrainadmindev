@@ -102,6 +102,7 @@ export default function FAQCard() {
     const response = await handleDeleteFAQ(openModalDeleteId);
     if (response.status === 200) {
       toast.success("FAQ Deleted Successfully");
+      window.location.reload();
     } else if (response.error) {
       toast.error(response.message);
     }
