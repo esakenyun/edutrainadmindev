@@ -8,7 +8,7 @@ export async function handleFetchTrainingData() {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/trainings");
-    console.log(response);
+    // console.log(response);
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -130,13 +130,17 @@ export async function handleFetchTrainingMaterialData(id) {
   }
 }
 
-export async function handleAddDocumentMaterialTraining(id) {
+export async function handleAddDocumentMaterialTraining(id, formDataMaterialTraining) {
   try {
     const token = Cookies.get("token");
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/materials`);
+    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/materials`, formDataMaterialTraining, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   } catch (error) {
     console.error("Error fetching training data:", error);

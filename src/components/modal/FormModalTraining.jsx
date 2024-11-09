@@ -64,10 +64,10 @@ const Page2 = ({ formData, handleChange }) => (
 const Page3 = ({ formData, handleChange, setBannerFile }) => (
   <>
     <label htmlFor="Status" className="text-primary-white">
-      Status
+      Event Status
     </label>
     <select name="status" id="Status" className="w-full py-3 px-2 rounded-md mb-4" value={formData.status} onChange={handleChange("status")}>
-      <option value="null">Select Your Status</option>
+      <option value="">Select Your Event Status</option>
       <option value="ONLINE">Online</option>
       <option value="OFFLINE">Offline</option>
       <option value="HYBRID">Hybrid</option>
@@ -141,6 +141,11 @@ export default function FormModalTraining({ isOpen, onClose }) {
   const handleSubmit = async () => {
     if (formData.price < 0) {
       toast.error("Price must be at least 0.");
+      return;
+    }
+
+    if (formData.status === null || formData.status === "") {
+      toast.error("Event Status must be filled");
       return;
     }
 

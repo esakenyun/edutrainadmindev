@@ -67,7 +67,7 @@ const Page3 = ({ formData, handleChange, setBannerFile }) => (
       Event Status
     </label>
     <select name="eventStatus" id="eventStatus" className="w-full py-3 px-2 rounded-md mb-2" value={formData.status} onChange={handleChange("status")}>
-      <option value="null">Select Your Event Status</option>
+      <option value="">Select Your Event Status</option>
       <option value="LIVE">Live</option>
       <option value="PLAYBACK">Playback</option>
     </select>
@@ -125,6 +125,11 @@ export default function FormModalWorkshop({ isOpen, onClose }) {
   const handleSubmit = async () => {
     if (formData.price === undefined || formData.price === null || formData.price === "" || formData.price < 0) {
       toast.error("Price must be at least 0.");
+      return;
+    }
+
+    if (formData.status === null || formData.status === "") {
+      toast.error("Event status must be filled");
       return;
     }
 

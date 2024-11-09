@@ -52,7 +52,7 @@ export default function FormModalMaterialTraining({ open, onClose, trainingData 
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 text-primary-white bg-primary-blue rounded-lg shadow-md border-none">
         <h2 className="text-xl font-bold mb-4">Add Material Document</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
           <div className="pb-3">
             <TextField
               type="text"

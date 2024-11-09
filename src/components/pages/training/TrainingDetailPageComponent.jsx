@@ -1,6 +1,6 @@
 import { BiCalendarExclamation } from "react-icons/bi";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import { FaRegTrashAlt, FaRegUser } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { TiStarburstOutline } from "react-icons/ti";
 import { BsPencil } from "react-icons/bs";
 import DeleteModal from "@/components/modal/DeleteModal";
@@ -66,13 +66,14 @@ export default function TrainingDetailPageComponent({ props }) {
 
   return (
     <div className="py-7">
+      {console.log(trainingData)}
       <div className="flex items-center gap-2 justify-between">
         <div className="py-2 px-2 text-xs md:text-2xl font-extrabold border-b-2 border-primary-blue text-primary-blue">Rincian Training</div>
       </div>
       <div className="py-4 px-3">
         <p className="font-bold uppercase text-black md:text-2xl ">{trainingData.title}</p>
         <div className="py-3 flex flex-col lg:flex-row gap-10">
-          <Image src={trainingData.banner} quality={100} width={500} height={500} className="w-9/12 h-auto rounded-xl" alt={trainingData.title} priority />
+          <Image src={trainingData.banner} quality={100} width={500} height={500} className="w-9/12 h-full rounded-xl" alt={trainingData.title} priority />
           <div className="flex flex-col gap-3">
             <div className="h-fit bg-primary-white rounded-lg shadow-2xl">
               <div className="py-5 px-5 text-secondary-dark">
@@ -83,10 +84,10 @@ export default function TrainingDetailPageComponent({ props }) {
                   </div>
                 </div>
                 <div className="py-3 flex flex-col gap-4">
-                  <div className="flex gap-2 items-center">
+                  {/* <div className="flex gap-2 items-center">
                     <FaRegUser className="text-xl" />
                     <p className="text-sm">John McKenny</p>
-                  </div>
+                  </div> */}
                   <div className="flex gap-2 items-center">
                     <BiCalendarExclamation className="text-xl" />
                     <p className="text-sm">{formatTrainingDates(trainingData.startTime, trainingData.endTime)}</p>
@@ -151,14 +152,18 @@ export default function TrainingDetailPageComponent({ props }) {
                 <p className="font-bold text-xl">URL Group</p>
                 <div className="flex items-center gap-3">
                   <p>Title :</p>
-                  <p className="font-bold">{trainingData.urlExternalTitle}</p>
+                  <p className="font-bold">{trainingData.urlExternalTitle || "-"}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <p>URL :</p>
                   <div className="flex">
-                    <a href={trainingData.urlExternal} className="w-52 break-all text-primary-blue hover:text-secondary-activeblue underline" target="_blank">
-                      {trainingData.urlExternal}
-                    </a>
+                    {trainingData.urlExternal ? (
+                      <a href={trainingData.urlExternal} className="w-52 break-all text-primary-blue hover:text-secondary-activeblue underline" target="_blank" rel="noopener noreferrer">
+                        {trainingData.urlExternal}
+                      </a>
+                    ) : (
+                      <p className="font-bold">-</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -166,22 +171,45 @@ export default function TrainingDetailPageComponent({ props }) {
             <div className="h-fit bg-primary-white rounded-lg shadow-2xl">
               <div className="py-3 px-3">
                 <p className="font-bold text-xl">Material Data</p>
-                <div className="flex items-center gap-3">
-                  <p>Title :</p>
-                  <p className="font-bold">{materialData.title}</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <p>Description :</p>
-                  <p className="font-bold">{materialData.description}</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <p>URL :</p>
-                  <div className="flex">
-                    <a href={materialData.url} className="w-52 break-all text-primary-blue hover:text-secondary-activeblue underline" target="_blank">
-                      {materialData.url}
-                    </a>
+                {materialData.length === 0 ? (
+                  <div className="">
+                    <div className="flex items-center gap-3">
+                      <p>Title :</p>
+                      <p className="font-bold">-</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <p>Description :</p>
+                      <p className="font-bold">-</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <p>URL :</p>
+                      <div className="flex">
+                        <p className="font-bold">-</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  materialData.map((material) => (
+                    <div key={material.id} className="my-1">
+                      <div className="flex items-center gap-3">
+                        <p>Title :</p>
+                        <p className="font-bold">{material.title}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <p>Description :</p>
+                        <p className="font-bold">{material.description}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <p>URL :</p>
+                        <div className="flex">
+                          <a href={material.url} className="w-52 break-all text-primary-blue hover:text-secondary-activeblue underline" target="_blank" rel="noopener noreferrer">
+                            {material.url}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
