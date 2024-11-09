@@ -43,7 +43,7 @@ export default function InputCategoryCreatable({ selectedCategories, onSelectCat
   const fetchAllCategory = async () => {
     const response = await handleFetchCategoryData();
     setCategoryName(response);
-    console.log(response);
+    // console.log(response);
   };
 
   useEffect(() => {

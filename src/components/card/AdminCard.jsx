@@ -92,7 +92,7 @@ export default function AdminCard() {
 
   const handleDeleteConfirm = async () => {
     const response = await handleDeleteAdminAccount(openModalDeleteId);
-    console.log(response);
+    // console.log(response);
     if (response.status === 200) {
       toast.success("Admin Account Deleted Successfully");
       window.location.reload();
@@ -101,7 +101,6 @@ export default function AdminCard() {
       toast.error("Admin Account Not Deleted");
     }
     setOpenModalDeleteId(null);
-    router.refresh();
   };
 
   useEffect(() => {

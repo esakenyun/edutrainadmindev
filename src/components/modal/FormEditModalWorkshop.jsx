@@ -34,6 +34,7 @@ const Page1 = ({ formData, handleChange, workshopData }) => (
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
+    <p className="text-red-600 text-xs mb-1 font-medium">*price tidak boleh kosong</p>
     <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none mb-2" onChange={handleChange("price")} defaultValue={workshopData?.lastWorkshopHistory?.price} />
     <label htmlFor="instructor" className="text-primary-white">
       Instructor
@@ -128,7 +129,7 @@ export default function FormEditModalWorkshop({ currentData, isOpen, onClose }) 
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
-    console.log(formData);
+    // console.log(formData);
   }, []);
 
   const handleSubmit = async () => {
@@ -150,7 +151,7 @@ export default function FormEditModalWorkshop({ currentData, isOpen, onClose }) 
 
       banner: bannerFile,
     };
-    console.log(formDataWorkshop);
+    // console.log(formDataWorkshop);
 
     setLoading(true);
     const response = await handleEditWorkshop(currentData.id, formDataWorkshop);

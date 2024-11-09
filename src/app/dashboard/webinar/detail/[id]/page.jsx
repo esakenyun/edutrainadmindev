@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import WebinarDetailPageComponent from "@/components/pages/webinar/WebinarDetailPageComponent";
 import { handleDeleteWebinar, handleFetchDetailWebinarData, handleOpenModalDetailWebinar } from "@/helpers/webinarHelper";
 import LoadingAnimation from "@/components/loading/LoadingAnimation";
+import { useRouter } from "next/navigation";
 
 export default function WebinarDetail({ params }) {
   const router = useRouter();
@@ -18,13 +18,6 @@ export default function WebinarDetail({ params }) {
     setCurrentData(response);
     setModalOpen(true);
   };
-
-  // useEffect(() => {
-  //   // console.log("heehe");
-  //   if (currentData !== null) {
-  //     setModalOpen(true);
-  //   }
-  // }, [currentData, setModalOpen]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -52,7 +45,6 @@ export default function WebinarDetail({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await handleFetchDetailWebinarData(params.id);
-      console.log(response);
       setTimeout(() => {
         setWebinarData(response);
         setCurrentData(response);

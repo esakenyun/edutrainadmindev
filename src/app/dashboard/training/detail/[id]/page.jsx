@@ -4,7 +4,7 @@ import { handleDeleteTraining, handleFetchDetailTrainingData, handleFetchTrainin
 import { useRouter } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import LoadingAnimation from "@/components/loading/LoadingAnimation";
-import TrainingDetailPageComponent from "@/components/pages/TrainingDetailPageComponent";
+import TrainingDetailPageComponent from "@/components/pages/training/TrainingDetailPageComponent";
 
 function formatTrainingDates(startTime, endTime) {
   if (!startTime || !endTime) {
@@ -101,7 +101,7 @@ export default function TrainingDetail({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await handleFetchDetailTrainingData(params.id);
-      console.log(response);
+      // console.log(response);
       setTimeout(() => {
         setTrainingData(response);
         setCurrentData(response);

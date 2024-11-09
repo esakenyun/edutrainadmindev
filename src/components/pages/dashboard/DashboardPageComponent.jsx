@@ -14,7 +14,6 @@ export default function DashboardPageComponent() {
       setStatisticData(response);
       setLoading(false);
     }, 2000);
-    console.log(response);
   };
 
   useEffect(() => {

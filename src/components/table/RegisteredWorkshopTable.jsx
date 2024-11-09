@@ -59,7 +59,7 @@ export default function RegisteredWorkshopTable({ id }) {
 
   const fetchAllDataUserTraining = async () => {
     const response = await handleFetchRegisteredWorkshopUsers(id);
-    console.log(response);
+    // console.log(response);
     setRegisteredUser(response);
     setLoading(false);
   };

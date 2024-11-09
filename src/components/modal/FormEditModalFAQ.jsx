@@ -44,7 +44,7 @@ export default function FormEditModalFAQ({ isOpen, onClose, faqData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     setLoading(true);
     const response = await handleEditFAQ(faqData.id, formData);
     if (response.status === 200) {

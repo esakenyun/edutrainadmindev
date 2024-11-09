@@ -55,8 +55,8 @@ export async function handleAddTraining(formDataTraining) {
       },
     });
     // const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/trainings", formDataTraining, );
-    console.log(formDataTraining);
-    console.log(response);
+    // console.log(formDataTraining);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(formDataTraining);
@@ -78,7 +78,7 @@ export async function handleEditTraining(id, formDataTraining) {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(formDataTraining);
+    // console.log(formDataTraining);
     // console.log(response);
     return response;
   } catch (error) {

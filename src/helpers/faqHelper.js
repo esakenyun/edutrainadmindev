@@ -23,8 +23,8 @@ export async function handleAddFAQ(formDataFAQ) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/faqs", formDataFAQ);
-    console.log(formDataFAQ);
-    console.log(response);
+    // console.log(formDataFAQ);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ export async function handleAddFAQ(formDataFAQ) {
 export async function handleEditFAQ(id, formDataFAQ) {
   try {
     const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/faqs/${id}`, formDataFAQ);
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.error("Error:", error);

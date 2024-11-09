@@ -25,7 +25,7 @@ export default function FormModalVideo({ isOpen, onClose }) {
     setLoading(true);
     const response = await handleAddVideoContent(formData);
     setLoading(false);
-    console.log(response);
+    // console.log(response);
     if (response.status === 201) {
       toast.success("Video Content Added Successfully");
       window.location.reload();

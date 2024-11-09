@@ -49,8 +49,6 @@ export async function handleAddWebinar(formDataWebinar) {
     }
 
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/webinars", formDataWebinar);
-    console.log(formDataWebinar);
-    console.log(response);
     return response;
   } catch (error) {
     console.log(formDataWebinar);
@@ -71,8 +69,7 @@ export async function handleEditWebinar(id, formDataWebinar) {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(formDataWebinar);
-    console.log(response);
+
     return response;
   } catch (error) {
     console.log(formDataWebinar);
@@ -89,7 +86,6 @@ export async function handleOpenModalDetailWebinar(id) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`);
-    console.log(response);
     return (await response.json())["data"];
   } catch (error) {
     console.error("Error fetching webinar data:", error);
@@ -104,7 +100,6 @@ export async function handleDeleteWebinar(id) {
     }
 
     const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`);
-    console.log(response);
   } catch (error) {
     console.error("Error fetching webinar data:", error);
   }

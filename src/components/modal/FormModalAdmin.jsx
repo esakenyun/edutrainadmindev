@@ -38,7 +38,7 @@ export default function FormModalAdmin({ isOpen, onClose }) {
     setLoading(true);
     const response = await handleAddAdminAccount(formData);
     setLoading(false);
-    console.log(response);
+    // console.log(response);
     if (response.status === 201) {
       toast.success("Admin Account Created Successfully");
       window.location.reload();

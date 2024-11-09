@@ -45,7 +45,7 @@ export default function WorkshopDetail({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await handleFetchDetailWorkshopData(params.id);
-      console.log(response);
+      // console.log(response);
       setTimeout(() => {
         setWorkshopData(response);
         setCurrentData(response);

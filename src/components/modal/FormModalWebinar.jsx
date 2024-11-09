@@ -139,13 +139,13 @@ export default function FormModalWebinar({ isOpen, onClose }) {
     }
 
     formDataWebinar.append("banner", bannerFile);
-    console.log(formDataWebinar);
+    // console.log(formDataWebinar);
     const formDataObject = {};
     formDataWebinar.forEach((value, key) => {
       formDataObject[key] = value;
     });
 
-    console.log(formDataObject);
+    // console.log(formDataObject);
 
     setLoading(true);
     const response = await handleAddWebinar(formDataWebinar);

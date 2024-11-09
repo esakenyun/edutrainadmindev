@@ -35,6 +35,7 @@ const Page1 = ({ handleChange, webinarData, formData }) => (
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
+    <p className="text-red-600 text-xs mb-1 font-medium">*price tidak boleh kosong</p>
     <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={webinarData?.lastWebinarHistory?.price} />
   </>
 );

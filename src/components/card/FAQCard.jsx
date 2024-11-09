@@ -85,7 +85,7 @@ export default function FAQCard() {
 
   const fetchAllFaq = async () => {
     const response = await handleFetchFAQData();
-    console.log(response);
+    // console.log(response);
     setFaqData(response);
     setLoading(false);
   };

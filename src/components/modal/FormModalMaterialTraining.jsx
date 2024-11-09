@@ -21,14 +21,21 @@ export default function FormModalMaterialTraining({ open, onClose, trainingData 
   };
 
   const handleSubmit = async () => {
-    const formDataMaterialTraining = new FormData();
-    for (const key in formData) {
-      formDataMaterialTraining.append(key, formData[key]);
+    if (!documentFile) {
+      toast.error("Please select a document file.");
+      return;
     }
 
-    formDataMaterialTraining.append("document", documentFile);
+    const formDataMaterialTraining = {
+      title: formData.title,
+      description: formData.description,
+      document: documentFile,
+    };
+
+    console.log(trainingData.id);
+
     setLoading(true);
-    const response = await handleAddDocumentMaterialTraining(trainingData.id, formData);
+    const response = await handleAddDocumentMaterialTraining(trainingData.id, formDataMaterialTraining);
     setLoading(false);
     if (response.status === 200) {
       toast.success("Add Document Material Training Successfully");
@@ -42,17 +49,60 @@ export default function FormModalMaterialTraining({ open, onClose, trainingData 
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 bg-primary-white rounded-lg shadow-md border-none">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 p-8 text-primary-white bg-primary-blue rounded-lg shadow-md border-none">
         <h2 className="text-xl font-bold mb-4">Add Material Document</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="pb-3">
-            <TextField type="text" label="Title" name="title" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("title")} value={formData.title} />
-            <TextField type="text" label="Description" name="description" margin="normal" size="small" className="mb-4 w-full" onChange={handleChange("description")} value={formData.description} />
-            <TextField type="file" name="document" onChange={(e) => setDocumentFile(e.target.files[0])} />
+            <TextField
+              type="text"
+              label="Title"
+              name="title"
+              margin="normal"
+              size="small"
+              className="mb-4 w-full"
+              onChange={handleChange("title")}
+              value={formData.title}
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiInputBase-root": {
+                  borderRadius: "8px",
+                },
+              }}
+            />
+            <TextField
+              type="text"
+              label="Description"
+              name="description"
+              margin="normal"
+              size="small"
+              className="mb-4 w-full"
+              onChange={handleChange("description")}
+              value={formData.description}
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiInputBase-root": {
+                  borderRadius: "8px",
+                },
+              }}
+            />
+            <TextField
+              type="file"
+              name="document"
+              onChange={(e) => setDocumentFile(e.target.files[0])}
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiInputBase-root": {
+                  borderRadius: "8px",
+                },
+              }}
+            />
           </div>
-          <Button variant="contained" color="primary" className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md" onClick={handleSubmit} disabled={loading}>
-            Submit
+          <Button variant="contained" color="primary" className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md" onClick={handleSubmit} disabled={loading || formData.title.trim() === ""}>
+            {loading ? "Submit.." : "Submit"}
           </Button>
         </form>
       </div>

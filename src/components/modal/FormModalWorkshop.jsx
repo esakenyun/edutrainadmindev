@@ -140,7 +140,7 @@ export default function FormModalWorkshop({ isOpen, onClose }) {
     }
 
     formDataWorkshop.append("banner", bannerFile);
-    console.log("FormData being submitted:", Object.fromEntries(formDataWorkshop));
+    // console.log("FormData being submitted:", Object.fromEntries(formDataWorkshop));
 
     setLoading(true);
     const response = await handleAddWorkshop(formDataWorkshop);

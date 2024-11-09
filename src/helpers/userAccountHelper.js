@@ -35,7 +35,7 @@ export async function handleAddUserAccount(formDataUser) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/accounts", formDataUser);
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.error("Error:", error);

@@ -1,6 +1,6 @@
 "use client";
+import TrainingPageComponent from "@/components/pages/training/TrainingPageComponent";
 import { useState } from "react";
-import TrainingPageComponent from "@/components/pages/TrainingPageComponent";
 
 export default function Training() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

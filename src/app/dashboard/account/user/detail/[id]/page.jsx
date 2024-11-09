@@ -13,7 +13,7 @@ export default function UserDetail({ params }) {
 
   const fetchUserData = async () => {
     const response = await handleFetchDetailUserData(params.id);
-    console.log(response);
+    // console.log(response);
     setUserData(response);
     setLoading(false);
   };

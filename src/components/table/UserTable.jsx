@@ -100,9 +100,13 @@ const DropdownMenu = ({ params }) => {
     }
   };
 
+  const handleEdit = () => {
+    const userId = params.id;
+    router.push(`/dashboard/account/user/detail/${userId}`);
+  };
+
   const handleCloseModalSuccess = () => {
     setOpenModalSuccess(false);
-    router.refresh();
   };
   return (
     <>
@@ -110,7 +114,7 @@ const DropdownMenu = ({ params }) => {
         <IoIosMore />
       </button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
         <MenuItem onClick={onHandleClickHapus}>Hapus</MenuItem>
       </Menu>
       <DeleteModal open={openModalDelete} onClose={handleCloseModalDelete} onConfirm={handleDeleteConfirm} title="Apa anda yakin ingin menghapus akun user ini?" description="Data-data terkait akun tersebut akan terhapus secara permanen." />

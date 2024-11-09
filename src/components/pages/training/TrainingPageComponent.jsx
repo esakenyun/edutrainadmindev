@@ -1,7 +1,7 @@
-import TrainingCard from "../card/TrainingCard";
-import Dropdown from "../dropdown/dropdown";
-import FormModalTraining from "../modal/FormModalTraining";
-import Searchbar from "../searchbar/searchbar";
+import TrainingCard from "@/components/card/TrainingCard";
+import Dropdown from "@/components/dropdown/dropdown";
+import FormModalTraining from "@/components/modal/FormModalTraining";
+import Searchbar from "@/components/searchbar/searchbar";
 import { FaSignal } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 

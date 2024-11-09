@@ -32,10 +32,12 @@ const Page1 = ({ formData, trainingData, handleChange, handleChangeShowPrice }) 
     <label htmlFor="syllabus" className="text-primary-white">
       Syllabus
     </label>
+    <p className="text-red-600 text-xs mb-0.5 font-medium">*dapat menggunakan inner html</p>
     <textarea name="syllabus" id="syllabus" rows={3} className="text-black w-full rounded-md py-3 px-2 outline-none mb-0.5" onChange={handleChange("syllabus")} value={formData.syllabus} required></textarea>
     <label htmlFor="price" className="text-primary-white">
       Price
     </label>
+    <p className="text-red-600 text-xs mb-0.5 font-medium">*price tidak boleh kosong</p>
     <input type="number" name="price" id="price" min={1} className="text-black w-full py-3 px-2 rounded-md outline-none" onChange={handleChange("price")} defaultValue={trainingData?.lastTrainingHistory?.price} />
     <div className="w-fit bg-white py-2 flex gap-3 items-center mt-3 p-2 rounded-md">
       <label htmlFor="showPrice" className="text-primary-darkblue">
@@ -135,7 +137,7 @@ export default function FormEditModalTraining({ currentData, isOpen, onClose }) 
       [field]: isChecked,
     }));
 
-    console.log(isChecked);
+    // console.log(isChecked);
   };
 
   const handleNext = () => {

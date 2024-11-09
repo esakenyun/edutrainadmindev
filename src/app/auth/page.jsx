@@ -52,7 +52,7 @@ export default function LoginPage() {
       if (await handleLogin(email, password)) {
         router.push("/dashboard");
       } else {
-        console.log("here");
+        // console.log("here");
         setFailedLogin(true);
       }
     } catch (error) {

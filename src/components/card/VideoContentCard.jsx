@@ -74,7 +74,7 @@ export default function VideoContentCard() {
   };
 
   const openModalDelete = (id) => {
-    console.log(id);
+    // console.log(id);
     setOpenModalDeleteId(id);
   };
 

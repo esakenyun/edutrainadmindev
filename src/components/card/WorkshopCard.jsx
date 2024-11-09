@@ -106,8 +106,10 @@ export default function WorkshopCard() {
 
   const fetchAllWorkshop = async () => {
     const response = await handleFetchWorkshopData();
+    // console.log(response);
+    const sortedWorkshop = response.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
     setTimeout(() => {
-      setWorkshopData(response);
+      setWorkshopData(sortedWorkshop);
       setLoading(false);
     }, 2000);
   };

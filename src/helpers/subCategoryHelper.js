@@ -23,7 +23,7 @@ export async function handleAddSubCategory(name) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/sub-categories", name);
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.error("Error:", error);

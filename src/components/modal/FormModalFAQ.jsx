@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Button, Modal } from "@mui/material";
 import { handleAddFAQ } from "@/helpers/faqHelper";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { FaRegQuestionCircle } from "react-icons/fa";
 
 export default function FormModalFAQ({ isOpen, onClose }) {
-  const router = useRouter();
-
   const [formData, setFormData] = useState({
     question: "",
     answer: "",

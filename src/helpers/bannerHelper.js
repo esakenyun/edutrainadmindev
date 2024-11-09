@@ -23,12 +23,24 @@ export async function handleAddBanner(formDataBanner) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/banners", formDataBanner);
-    console.log(formDataBanner);
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
     console.log(error.message);
+    return { error: true, message: error.response?.data?.message || "An error occurred" };
+  }
+}
+
+export async function handleEditBanner(id, formDataBanner) {
+  try {
+    const token = Cookies.get("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/banners/${id}`, formDataBanner);
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
 }

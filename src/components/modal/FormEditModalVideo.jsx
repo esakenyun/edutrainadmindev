@@ -12,7 +12,7 @@ export default function FormEditModalVideo({ open, onClose, videoData }) {
 
   useEffect(() => {
     if (videoData) {
-      console.log(videoData.id);
+      // console.log(videoData.id);
       setFormData({
         title: videoData.title || "",
         url: videoData.url || "",

@@ -20,8 +20,10 @@ export default function WebinarCard() {
 
   const fetchAllWebinar = async () => {
     const response = await handleFetchWebinarData();
+    // console.log(response);
+    const sortedWebinars = response.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
     setTimeout(() => {
-      setWebinarData(response);
+      setWebinarData(sortedWebinars);
       setLoading(false);
     }, 2000);
   };
@@ -32,7 +34,6 @@ export default function WebinarCard() {
 
   if (loading) {
     return <WebinarCardSkeleton />;
-    // return <div className="flex justify-center items-center pt-20">Loading...</div>;
   }
 
   if (!webinarData || webinarData.length === 0) {

@@ -44,8 +44,8 @@ export async function handleAddWorkshop(formDataWorkshop) {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(formDataWorkshop);
-    console.log(response);
+    // console.log(formDataWorkshop);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -74,8 +74,8 @@ export async function handleEditWorkshop(id, formDataWorkshop) {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(formDataWorkshop);
-    console.log(response);
+    // console.log(formDataWorkshop);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);

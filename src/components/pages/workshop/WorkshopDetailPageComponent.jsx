@@ -91,7 +91,7 @@ export default function WorkshopDetailPageComponent({ props }) {
         <div className="py-6">
           <p className="font-medium">{workshopData.description}</p>
         </div>
-        {console.log(workshopId)}
+        {/* {console.log(workshopId)} */}
         <RegisteredWorkshopTable id={workshopId} />
       </div>
     </div>

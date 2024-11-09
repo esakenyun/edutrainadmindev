@@ -22,8 +22,8 @@ export async function handleAddVideoContent(formDataVideoContent) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/videos", formDataVideoContent);
-    console.log(formDataVideoContent);
-    console.log(response);
+    // console.log(formDataVideoContent);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -35,7 +35,7 @@ export async function handleAddVideoContent(formDataVideoContent) {
 export async function handleEditVideoContent(id, formDataVideoContent) {
   try {
     const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/videos/${id}`, formDataVideoContent);
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.error("Error:", error);

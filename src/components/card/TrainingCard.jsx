@@ -152,8 +152,10 @@ export default function TrainingCard() {
   };
   const fetchAlTraining = async () => {
     const response = await handleFetchTrainingData();
+    // console.log(response);
+    const sortedTraning = response.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
     setTimeout(() => {
-      setTrainingData(response);
+      setTrainingData(sortedTraning);
       setLoading(false);
     }, 2000);
   };
