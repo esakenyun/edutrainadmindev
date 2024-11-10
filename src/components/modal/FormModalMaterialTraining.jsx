@@ -88,6 +88,8 @@ export default function FormModalMaterialTraining({ open, onClose, trainingData 
                 },
               }}
             />
+            <label htmlFor="Documet">Document</label>
+            <p className="text-sm mb-0.5 font-medium text-red-600">*filetype .pdf, .doc, .xls, .xlsx, .ppt, .pptx, .mdb, .docx </p>
             <TextField
               type="file"
               name="document"
