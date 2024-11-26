@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaChalkboardTeacher, FaLaptopCode, FaSignal } from "react-icons/fa";
 import { IoIosMore } from "react-icons/io";
 import DashboardSkeleton from "../../skeleton/DashboardSkeleton";
+import { toast } from "sonner";
 
 export default function DashboardPageComponent() {
   const [statisticData, setStatisticData] = useState({});
@@ -11,9 +12,15 @@ export default function DashboardPageComponent() {
   const fetchAllStatistic = async () => {
     const response = await handleFetchStatistics();
     setTimeout(() => {
-      setStatisticData(response);
-      setLoading(false);
-    }, 2000);
+      if (response.status === 200) {
+        setStatisticData(response.data.data);
+        setLoading(false);
+      } else if (response.error) {
+        toast.error(response.message);
+        setStatisticData(response.data);
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   useEffect(() => {
@@ -40,7 +47,7 @@ export default function DashboardPageComponent() {
                 <IoIosMore className="text-xl" />
               </div>
             </div>
-            <div className="pt-10 pb-5 pl-14 text-4xl font-semibold">{statisticData.totalEvent}</div>
+            <div className="pt-10 pb-5 pl-14 text-4xl font-semibold">{statisticData.totalEvent ?? 0}</div>
             <div className="flex items-center pl-14 gap-2">
               <div className="px-7 py-0.5 rounded-lg bg-green-100 text-sm text-green-500 font-bold">+ 23.5</div>
               <div className="text-sm text-secondary-grey ">7 hari terakhir</div>
@@ -55,7 +62,7 @@ export default function DashboardPageComponent() {
                 <IoIosMore className="text-xl" />
               </div>
             </div>
-            <div className="pt-10 pb-5 pl-14 text-4xl font-semibold">{statisticData.userCount}</div>
+            <div className="pt-10 pb-5 pl-14 text-4xl font-semibold">{statisticData.userCount ?? 0}</div>
             <div className="flex items-center pl-14 gap-2 ">
               <div className="px-7 py-0.5 rounded-lg bg-green-100 text-sm text-green-500 font-bold">+ 23.5</div>
               <div className="text-sm text-secondary-grey ">7 hari terakhir</div>
@@ -74,7 +81,7 @@ export default function DashboardPageComponent() {
                   <IoIosMore className="text-xl" />
                 </div>
               </div>
-              <div className="py-5 pl-9 text-3xl">{statisticData.webinarCount}</div>
+              <div className="py-5 pl-9 text-3xl">{statisticData.webinarCount ?? 0}</div>
               <div className="flex items-center pl-9 gap-2">
                 <div className="px-7 py-0.5 rounded-lg bg-green-100 text-sm text-green-500 font-bold">+ 23.5</div>
                 <div className="text-sm text-secondary-grey ">7 hari terakhir</div>
@@ -90,7 +97,7 @@ export default function DashboardPageComponent() {
                   <IoIosMore className="text-xl" />
                 </div>
               </div>
-              <div className="py-5 pl-9 text-3xl">{statisticData.workshopCount}</div>
+              <div className="py-5 pl-9 text-3xl">{statisticData.workshopCount ?? 0}</div>
               <div className="flex items-center pl-9 gap-2">
                 <div className="px-7 py-0.5 rounded-lg bg-green-100 text-sm text-green-500 font-bold">+ 23.5</div>
                 <div className="text-sm text-secondary-grey ">7 hari terakhir</div>
@@ -106,7 +113,7 @@ export default function DashboardPageComponent() {
                   <IoIosMore className="text-xl" />
                 </div>
               </div>
-              <div className="py-5 pl-9 text-3xl">{statisticData.trainingCount}</div>
+              <div className="py-5 pl-9 text-3xl">{statisticData.trainingCount ?? 0}</div>
               <div className="flex items-center pl-9 gap-2">
                 <div className="px-7 py-0.5 rounded-lg bg-green-100 text-sm text-green-500 font-bold">+ 23.5</div>
                 <div className="text-sm text-secondary-grey ">7 hari terakhir</div>
