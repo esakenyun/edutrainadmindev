@@ -28,6 +28,29 @@ The UI is built with the Next.js App Router and a component-driven structure ins
 - `Chart.js` / `react-chartjs-2`
 - `sonner` for notifications
 
+## Version History
+
+This repository is an update of an older Edutrain Admin codebase, so the stack version matters for anyone comparing implementations.
+
+### Previous baseline
+
+- Project baseline committed on `2024-06-28`
+- Built with `Next.js 14.1.4`
+- Used `React 18`
+- Used `eslint-config-next 14.1.4`
+- Used `eslint ^8`
+
+### Current updated stack
+
+- Dependency update committed on `2026-05-25`
+- Built with `Next.js 16.2.6`
+- Uses `React 18.3.1`
+- Uses `eslint-config-next 16.2.6`
+- Uses `eslint ^9.0.0`
+- Adds `zustand ^5.0.8` for the mock API store and local data workflows
+
+In short: this project started as a 2024 Next.js 14 admin app and has since been updated in 2026 to Next.js 16 with newer linting and local mock-state support.
+
 ## Project Structure
 
 ```text
