@@ -4,7 +4,12 @@ const nextConfig = {
   basePath: "/admin",
   assetPrefix: "/admin",
   images: {
-    domains: ["edutrain.uinsgd.ac.id"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "edutrain.uinsgd.ac.id",
+      },
+    ],
   },
 };
 
