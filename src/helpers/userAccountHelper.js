@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFecthUserAccountData() {
+async function handleFecthUserAccountDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/accounts?role=USER");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/accounts?role=USER"));
     return response.data.data;
   } catch (error) {
     console.log(error);
@@ -15,27 +13,36 @@ export async function handleFecthUserAccountData() {
   }
 }
 
-export async function handleFetchDetailUserData(id) {
+async function handleFecthUserAccountDataMock() {
+  return getStoreState().getUserAccounts();
+}
+
+export async function handleFecthUserAccountData() {
+  return isMockApiEnabled() ? handleFecthUserAccountDataMock() : handleFecthUserAccountDataApi();
+}
+
+async function handleFetchDetailUserDataApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/accounts/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/accounts/${id}`));
     return response.data.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
   }
 }
 
-export async function handleAddUserAccount(formDataUser) {
+async function handleFetchDetailUserDataMock(id) {
+  return getStoreState().getUserAccountById(id);
+}
+
+export async function handleFetchDetailUserData(id) {
+  return isMockApiEnabled() ? handleFetchDetailUserDataMock(id) : handleFetchDetailUserDataApi(id);
+}
+
+async function handleAddUserAccountApi(formDataUser) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/accounts", formDataUser);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/accounts"), formDataUser);
     return response;
   } catch (error) {
     console.error("Error:", error);
@@ -43,16 +50,31 @@ export async function handleAddUserAccount(formDataUser) {
   }
 }
 
-export async function handleDeleteUserAccount(id) {
+async function handleAddUserAccountMock(formDataUser) {
+  const user = getStoreState().addUserAccount(formDataUser);
+  return success(user, 201);
+}
+
+export async function handleAddUserAccount(formDataUser) {
+  return isMockApiEnabled() ? handleAddUserAccountMock(formDataUser) : handleAddUserAccountApi(formDataUser);
+}
+
+async function handleDeleteUserAccountApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/accounts/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/accounts/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching User Account data:", error);
     return false;
   }
+}
+
+async function handleDeleteUserAccountMock(id) {
+  getStoreState().deleteUserAccount(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteUserAccount(id) {
+  return isMockApiEnabled() ? handleDeleteUserAccountMock(id) : handleDeleteUserAccountApi(id);
 }

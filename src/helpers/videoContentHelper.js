@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchVideoContentData() {
+async function handleFetchVideoContentDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/videos");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/videos"));
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -15,15 +13,18 @@ export async function handleFetchVideoContentData() {
   }
 }
 
-export async function handleAddVideoContent(formDataVideoContent) {
+async function handleFetchVideoContentDataMock() {
+  return getStoreState().getVideos();
+}
+
+export async function handleFetchVideoContentData() {
+  return isMockApiEnabled() ? handleFetchVideoContentDataMock() : handleFetchVideoContentDataApi();
+}
+
+async function handleAddVideoContentApi(formDataVideoContent) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/videos", formDataVideoContent);
-    // console.log(formDataVideoContent);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/videos"), formDataVideoContent);
     return response;
   } catch (error) {
     console.log(error);
@@ -32,10 +33,18 @@ export async function handleAddVideoContent(formDataVideoContent) {
   }
 }
 
-export async function handleEditVideoContent(id, formDataVideoContent) {
+async function handleAddVideoContentMock(formDataVideoContent) {
+  const video = getStoreState().addVideo(formDataVideoContent);
+  return success(video, 201);
+}
+
+export async function handleAddVideoContent(formDataVideoContent) {
+  return isMockApiEnabled() ? handleAddVideoContentMock(formDataVideoContent) : handleAddVideoContentApi(formDataVideoContent);
+}
+
+async function handleEditVideoContentApi(id, formDataVideoContent) {
   try {
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/videos/${id}`, formDataVideoContent);
-    // console.log(response);
+    const response = await axios.put(buildApiUrl(`/videos/${id}`), formDataVideoContent);
     return response;
   } catch (error) {
     console.error("Error:", error);
@@ -43,16 +52,31 @@ export async function handleEditVideoContent(id, formDataVideoContent) {
   }
 }
 
-export async function handleDeleteVideoContent(id) {
+async function handleEditVideoContentMock(id, formDataVideoContent) {
+  const video = getStoreState().editVideo(id, formDataVideoContent);
+  return success(video, 200);
+}
+
+export async function handleEditVideoContent(id, formDataVideoContent) {
+  return isMockApiEnabled() ? handleEditVideoContentMock(id, formDataVideoContent) : handleEditVideoContentApi(id, formDataVideoContent);
+}
+
+async function handleDeleteVideoContentApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/videos/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/videos/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching Video Content data:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleDeleteVideoContentMock(id) {
+  getStoreState().deleteVideo(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteVideoContent(id) {
+  return isMockApiEnabled() ? handleDeleteVideoContentMock(id) : handleDeleteVideoContentApi(id);
 }

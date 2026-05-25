@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchWebinarData() {
+async function handleFetchWebinarDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/webinars");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/webinars"));
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -15,40 +13,54 @@ export async function handleFetchWebinarData() {
   }
 }
 
-export async function handleFetchDetailWebinarData(id) {
+async function handleFetchWebinarDataMock() {
+  return getStoreState().getWebinars();
+}
+
+export async function handleFetchWebinarData() {
+  return isMockApiEnabled() ? handleFetchWebinarDataMock() : handleFetchWebinarDataApi();
+}
+
+async function handleFetchDetailWebinarDataApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`);
-    return (await response.json())["data"];
+    setAuthorizationHeader();
+    const response = await fetch(buildApiUrl(`/webinars/${id}`));
+    return (await response.json()).data;
   } catch (error) {
     console.error("Error fetching webinar data:", error);
   }
 }
 
-export async function handleFetchRegisteredWebinarUsers(id) {
+async function handleFetchDetailWebinarDataMock(id) {
+  return getStoreState().getWebinarById(id);
+}
+
+export async function handleFetchDetailWebinarData(id) {
+  return isMockApiEnabled() ? handleFetchDetailWebinarDataMock(id) : handleFetchDetailWebinarDataApi(id);
+}
+
+async function handleFetchRegisteredWebinarUsersApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}/registered-users`);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/webinars/${id}/registered-users`));
     return response.data.data;
   } catch (error) {
     console.error("Error fetching training data:", error);
   }
 }
 
-export async function handleAddWebinar(formDataWebinar) {
-  try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
+async function handleFetchRegisteredWebinarUsersMock(id) {
+  return getStoreState().getRegisteredWebinarUsers(id);
+}
 
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/webinars", formDataWebinar);
+export async function handleFetchRegisteredWebinarUsers(id) {
+  return isMockApiEnabled() ? handleFetchRegisteredWebinarUsersMock(id) : handleFetchRegisteredWebinarUsersApi(id);
+}
+
+async function handleAddWebinarApi(formDataWebinar) {
+  try {
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/webinars"), formDataWebinar);
     return response;
   } catch (error) {
     console.log(formDataWebinar);
@@ -58,18 +70,23 @@ export async function handleAddWebinar(formDataWebinar) {
   }
 }
 
-export async function handleEditWebinar(id, formDataWebinar) {
+async function handleAddWebinarMock(formDataWebinar) {
+  const webinar = getStoreState().addWebinar(formDataWebinar);
+  return success(webinar, 201);
+}
+
+export async function handleAddWebinar(formDataWebinar) {
+  return isMockApiEnabled() ? handleAddWebinarMock(formDataWebinar) : handleAddWebinarApi(formDataWebinar);
+}
+
+async function handleEditWebinarApi(id, formDataWebinar) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`, formDataWebinar, {
+    setAuthorizationHeader();
+    const response = await axios.put(buildApiUrl(`/webinars/${id}`), formDataWebinar, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-
     return response;
   } catch (error) {
     console.log(formDataWebinar);
@@ -79,28 +96,47 @@ export async function handleEditWebinar(id, formDataWebinar) {
   }
 }
 
-export async function handleOpenModalDetailWebinar(id) {
+async function handleEditWebinarMock(id, formDataWebinar) {
+  const webinar = getStoreState().editWebinar(id, formDataWebinar);
+  return success(webinar, 200);
+}
+
+export async function handleEditWebinar(id, formDataWebinar) {
+  return isMockApiEnabled() ? handleEditWebinarMock(id, formDataWebinar) : handleEditWebinarApi(id, formDataWebinar);
+}
+
+async function handleOpenModalDetailWebinarApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`);
-    return (await response.json())["data"];
+    setAuthorizationHeader();
+    const response = await fetch(buildApiUrl(`/webinars/${id}`));
+    return (await response.json()).data;
   } catch (error) {
     console.error("Error fetching webinar data:", error);
   }
 }
 
-export async function handleDeleteWebinar(id) {
-  try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
+async function handleOpenModalDetailWebinarMock(id) {
+  return getStoreState().getWebinarById(id);
+}
 
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/webinars/${id}`);
+export async function handleOpenModalDetailWebinar(id) {
+  return isMockApiEnabled() ? handleOpenModalDetailWebinarMock(id) : handleOpenModalDetailWebinarApi(id);
+}
+
+async function handleDeleteWebinarApi(id) {
+  try {
+    setAuthorizationHeader();
+    return await axios.delete(buildApiUrl(`/webinars/${id}`));
   } catch (error) {
     console.error("Error fetching webinar data:", error);
   }
+}
+
+async function handleDeleteWebinarMock(id) {
+  getStoreState().deleteWebinar(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteWebinar(id) {
+  return isMockApiEnabled() ? handleDeleteWebinarMock(id) : handleDeleteWebinarApi(id);
 }

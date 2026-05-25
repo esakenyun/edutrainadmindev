@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchOrderData() {
+async function handleFetchOrderDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/orders");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/orders"));
     return response.data;
   } catch (error) {
     console.error(error);
@@ -15,27 +13,36 @@ export async function handleFetchOrderData() {
   }
 }
 
-export async function handleFetchDetailOrderData(id) {
+async function handleFetchOrderDataMock() {
+  return success(getStoreState().getOrders(), 200).data;
+}
+
+export async function handleFetchOrderData() {
+  return isMockApiEnabled() ? handleFetchOrderDataMock() : handleFetchOrderDataApi();
+}
+
+async function handleFetchDetailOrderDataApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/orders/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/orders/${id}`));
     return response.data.data;
   } catch (error) {
     console.error("Error fetching Order data:", error);
   }
 }
 
-export async function handleVerifyOrder(id) {
+async function handleFetchDetailOrderDataMock(id) {
+  return getStoreState().getOrderById(id);
+}
+
+export async function handleFetchDetailOrderData(id) {
+  return isMockApiEnabled() ? handleFetchDetailOrderDataMock(id) : handleFetchDetailOrderDataApi(id);
+}
+
+async function handleVerifyOrderApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/orders/${id}/verify`);
-    console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl(`/orders/${id}/verify`));
     return response;
   } catch (error) {
     console.error("Error fetching Order data:", error);
@@ -46,15 +53,19 @@ export async function handleVerifyOrder(id) {
   }
 }
 
-export async function handleAddOrder(formDataOrder) {
+async function handleVerifyOrderMock(id) {
+  getStoreState().verifyOrder(id);
+  return success(true, 200);
+}
+
+export async function handleVerifyOrder(id) {
+  return isMockApiEnabled() ? handleVerifyOrderMock(id) : handleVerifyOrderApi(id);
+}
+
+async function handleAddOrderApi(formDataOrder) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/orders", formDataOrder);
-    // console.log(formDataOrder);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/orders"), formDataOrder);
     return response;
   } catch (error) {
     console.log(error);
@@ -63,10 +74,18 @@ export async function handleAddOrder(formDataOrder) {
   }
 }
 
-export async function handleEditOrder(id, formDataOrder) {
+async function handleAddOrderMock(formDataOrder) {
+  const order = getStoreState().addOrder(formDataOrder);
+  return success(order, 201);
+}
+
+export async function handleAddOrder(formDataOrder) {
+  return isMockApiEnabled() ? handleAddOrderMock(formDataOrder) : handleAddOrderApi(formDataOrder);
+}
+
+async function handleEditOrderApi(id, formDataOrder) {
   try {
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/orders/${id}`, formDataOrder);
-    // console.log(response);
+    const response = await axios.put(buildApiUrl(`/orders/${id}`), formDataOrder);
     return response;
   } catch (error) {
     console.error("Error:", error);
@@ -77,14 +96,19 @@ export async function handleEditOrder(id, formDataOrder) {
   }
 }
 
-export async function handleDeleteOrder(id) {
+async function handleEditOrderMock(id, formDataOrder) {
+  const order = getStoreState().editOrder(id, formDataOrder);
+  return success(order, 200);
+}
+
+export async function handleEditOrder(id, formDataOrder) {
+  return isMockApiEnabled() ? handleEditOrderMock(id, formDataOrder) : handleEditOrderApi(id, formDataOrder);
+}
+
+async function handleDeleteOrderApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/orders/${id}`);
-    console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/orders/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching Order data:", error);
@@ -93,4 +117,13 @@ export async function handleDeleteOrder(id) {
       message: error.response?.data?.message || "An error occurred",
     };
   }
+}
+
+async function handleDeleteOrderMock(id) {
+  getStoreState().deleteOrder(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteOrder(id) {
+  return isMockApiEnabled() ? handleDeleteOrderMock(id) : handleDeleteOrderApi(id);
 }

@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchCategoryData() {
+async function handleFetchCategoryDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/categories");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/categories"));
     return response.data.data;
   } catch (error) {
     console.log(error);
@@ -15,17 +13,30 @@ export async function handleFetchCategoryData() {
   }
 }
 
-export async function handleAddCategory(name) {
+async function handleFetchCategoryDataMock() {
+  return getStoreState().getCategories();
+}
+
+export async function handleFetchCategoryData() {
+  return isMockApiEnabled() ? handleFetchCategoryDataMock() : handleFetchCategoryDataApi();
+}
+
+async function handleAddCategoryApi(name) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/categories", name);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/categories"), name);
     return response;
   } catch (error) {
     console.error("Error:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleAddCategoryMock(name) {
+  const category = getStoreState().addCategory(name);
+  return success(category, 201);
+}
+
+export async function handleAddCategory(name) {
+  return isMockApiEnabled() ? handleAddCategoryMock(name) : handleAddCategoryApi(name);
 }

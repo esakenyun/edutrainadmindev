@@ -1,14 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchTrainingData() {
+async function handleFetchTrainingDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/trainings");
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/trainings"));
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -16,47 +13,84 @@ export async function handleFetchTrainingData() {
   }
 }
 
-export async function handleFetchDetailTrainingData(id) {
+async function handleFetchTrainingDataMock() {
+  return getStoreState().getTrainings();
+}
+
+export async function handleFetchTrainingData() {
+  return isMockApiEnabled() ? handleFetchTrainingDataMock() : handleFetchTrainingDataApi();
+}
+
+async function handleFetchDetailTrainingDataApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}`);
-    // console.log(response.data.data);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/trainings/${id}`));
     return response.data.data;
   } catch (error) {
     console.error("Error fetching training data:", error);
   }
+}
+
+async function handleFetchDetailTrainingDataMock(id) {
+  return getStoreState().getTrainingById(id);
+}
+
+export async function handleFetchDetailTrainingData(id) {
+  return isMockApiEnabled() ? handleFetchDetailTrainingDataMock(id) : handleFetchDetailTrainingDataApi(id);
+}
+
+async function handleFetchRegisteredTrainingUsersApi(id) {
+  try {
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/trainings/${id}/registered-users`));
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching training data:", error);
+  }
+}
+
+async function handleFetchRegisteredTrainingUsersMock(id) {
+  return getStoreState().getRegisteredTrainingUsers(id);
 }
 
 export async function handleFetchRegisteredTrainingUsers(id) {
+  return isMockApiEnabled() ? handleFetchRegisteredTrainingUsersMock(id) : handleFetchRegisteredTrainingUsersApi(id);
+}
+
+async function handleAddTrainingApi(formDataTraining) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/registered-users`);
-    return response.data.data;
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/trainings"), formDataTraining, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
   } catch (error) {
-    console.error("Error fetching training data:", error);
+    console.log(formDataTraining);
+    console.log(error);
+    console.log(error.message);
+    return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleAddTrainingMock(formDataTraining) {
+  const training = getStoreState().addTraining(formDataTraining);
+  return success(training, 201);
 }
 
 export async function handleAddTraining(formDataTraining) {
+  return isMockApiEnabled() ? handleAddTrainingMock(formDataTraining) : handleAddTrainingApi(formDataTraining);
+}
+
+async function handleEditTrainingApi(id, formDataTraining) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/trainings", formDataTraining, {
+    setAuthorizationHeader();
+    const response = await axios.put(buildApiUrl(`/trainings/${id}`), formDataTraining, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    // const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/trainings", formDataTraining, );
-    // console.log(formDataTraining);
-    // console.log(response);
     return response;
   } catch (error) {
     console.log(formDataTraining);
@@ -64,51 +98,39 @@ export async function handleAddTraining(formDataTraining) {
     console.log(error.message);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleEditTrainingMock(id, formDataTraining) {
+  const training = getStoreState().editTraining(id, formDataTraining);
+  return success(training, 200);
 }
 
 export async function handleEditTraining(id, formDataTraining) {
-  try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
+  return isMockApiEnabled() ? handleEditTrainingMock(id, formDataTraining) : handleEditTrainingApi(id, formDataTraining);
+}
 
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}`, formDataTraining, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    // console.log(formDataTraining);
-    // console.log(response);
-    return response;
+async function handleOpenModalDetailTrainingApi(id) {
+  try {
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/trainings/${id}`));
+    return response.data.data;
   } catch (error) {
-    console.log(formDataTraining);
-    console.log(error);
-    console.log(error.message);
-    return { error: true, message: error.response?.data?.message || "An error occurred" };
+    console.error("Error fetching training data:", error);
   }
+}
+
+async function handleOpenModalDetailTrainingMock(id) {
+  return getStoreState().getTrainingById(id);
 }
 
 export async function handleOpenModalDetailTraining(id) {
-  try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}`);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error fetching training data:", error);
-  }
+  return isMockApiEnabled() ? handleOpenModalDetailTrainingMock(id) : handleOpenModalDetailTrainingApi(id);
 }
 
-export async function handleDeleteTraining(id) {
+async function handleDeleteTrainingApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/trainings/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching training data:", error);
@@ -116,13 +138,19 @@ export async function handleDeleteTraining(id) {
   }
 }
 
-export async function handleFetchTrainingMaterialData(id) {
+async function handleDeleteTrainingMock(id) {
+  getStoreState().deleteTraining(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteTraining(id) {
+  return isMockApiEnabled() ? handleDeleteTrainingMock(id) : handleDeleteTrainingApi(id);
+}
+
+async function handleFetchTrainingMaterialDataApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/materials`);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl(`/trainings/${id}/materials`));
     return response.data.data;
   } catch (error) {
     console.error("Error fetching training data:", error);
@@ -130,13 +158,18 @@ export async function handleFetchTrainingMaterialData(id) {
   }
 }
 
-export async function handleAddDocumentMaterialTraining(id, formDataMaterialTraining) {
+async function handleFetchTrainingMaterialDataMock(id) {
+  return getStoreState().getTrainingMaterials(id);
+}
+
+export async function handleFetchTrainingMaterialData(id) {
+  return isMockApiEnabled() ? handleFetchTrainingMaterialDataMock(id) : handleFetchTrainingMaterialDataApi(id);
+}
+
+async function handleAddDocumentMaterialTrainingApi(id, formDataMaterialTraining) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/trainings/${id}/materials`, formDataMaterialTraining, {
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl(`/trainings/${id}/materials`), formDataMaterialTraining, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -146,4 +179,13 @@ export async function handleAddDocumentMaterialTraining(id, formDataMaterialTrai
     console.error("Error fetching training data:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleAddDocumentMaterialTrainingMock(id, formDataMaterialTraining) {
+  const material = getStoreState().addTrainingMaterial(id, formDataMaterialTraining);
+  return success(material, 200);
+}
+
+export async function handleAddDocumentMaterialTraining(id, formDataMaterialTraining) {
+  return isMockApiEnabled() ? handleAddDocumentMaterialTrainingMock(id, formDataMaterialTraining) : handleAddDocumentMaterialTrainingApi(id, formDataMaterialTraining);
 }

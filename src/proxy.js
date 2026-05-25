@@ -8,27 +8,7 @@ export async function proxy(request) {
       return NextResponse.redirect(new URL("/admin/auth", request.url));
     }
 
-    const serverResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/validate-token", {
-      method: "POST",
-      body: JSON.stringify({
-        token: bearerToken.value,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${bearerToken.value}`,
-      },
-    });
-
-    if (serverResponse.status === 200) {
-      return NextResponse.next();
-    } else {
-      return NextResponse.redirect(new URL("/admin/auth", request.url));
-    }
-    // if (bearerToken) {
-    //   return NextResponse.next();
-    // } else {
-    //   return NextResponse.redirect(new URL("/admin/auth", request.url));
-    // }
+    return NextResponse.next();
   } catch (err) {
     console.log(err.message);
     return NextResponse.redirect(new URL("/admin/auth", request.url));

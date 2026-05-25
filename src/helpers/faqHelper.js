@@ -1,14 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchFAQData() {
+async function handleFetchFAQDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/faqs");
-    // console.log(response.data.data);
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/faqs"));
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -16,15 +13,18 @@ export async function handleFetchFAQData() {
   }
 }
 
-export async function handleAddFAQ(formDataFAQ) {
+async function handleFetchFAQDataMock() {
+  return getStoreState().getFaqs();
+}
+
+export async function handleFetchFAQData() {
+  return isMockApiEnabled() ? handleFetchFAQDataMock() : handleFetchFAQDataApi();
+}
+
+async function handleAddFAQApi(formDataFAQ) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/faqs", formDataFAQ);
-    // console.log(formDataFAQ);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/faqs"), formDataFAQ);
     return response;
   } catch (error) {
     console.log(error);
@@ -33,10 +33,18 @@ export async function handleAddFAQ(formDataFAQ) {
   }
 }
 
-export async function handleEditFAQ(id, formDataFAQ) {
+async function handleAddFAQMock(formDataFAQ) {
+  const faq = getStoreState().addFaq(formDataFAQ);
+  return success(faq, 201);
+}
+
+export async function handleAddFAQ(formDataFAQ) {
+  return isMockApiEnabled() ? handleAddFAQMock(formDataFAQ) : handleAddFAQApi(formDataFAQ);
+}
+
+async function handleEditFAQApi(id, formDataFAQ) {
   try {
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/faqs/${id}`, formDataFAQ);
-    // console.log(response);
+    const response = await axios.put(buildApiUrl(`/faqs/${id}`), formDataFAQ);
     return response;
   } catch (error) {
     console.error("Error:", error);
@@ -44,16 +52,31 @@ export async function handleEditFAQ(id, formDataFAQ) {
   }
 }
 
-export async function handleDeleteFAQ(id) {
+async function handleEditFAQMock(id, formDataFAQ) {
+  const faq = getStoreState().editFaq(id, formDataFAQ);
+  return success(faq, 200);
+}
+
+export async function handleEditFAQ(id, formDataFAQ) {
+  return isMockApiEnabled() ? handleEditFAQMock(id, formDataFAQ) : handleEditFAQApi(id, formDataFAQ);
+}
+
+async function handleDeleteFAQApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/faqs/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/faqs/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching FAQ data:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleDeleteFAQMock(id) {
+  getStoreState().deleteFaq(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteFAQ(id) {
+  return isMockApiEnabled() ? handleDeleteFAQMock(id) : handleDeleteFAQApi(id);
 }

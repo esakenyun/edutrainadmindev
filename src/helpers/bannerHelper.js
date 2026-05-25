@@ -1,14 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchBannerData() {
+async function handleFetchBannerDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/banners");
-
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/banners"));
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -16,13 +13,18 @@ export async function handleFetchBannerData() {
   }
 }
 
-export async function handleAddBanner(formDataBanner) {
+async function handleFetchBannerDataMock() {
+  return getStoreState().getBanners();
+}
+
+export async function handleFetchBannerData() {
+  return isMockApiEnabled() ? handleFetchBannerDataMock() : handleFetchBannerDataApi();
+}
+
+async function handleAddBannerApi(formDataBanner) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/banners", formDataBanner);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/banners"), formDataBanner);
     return response;
   } catch (error) {
     console.log(error);
@@ -31,13 +33,19 @@ export async function handleAddBanner(formDataBanner) {
   }
 }
 
-export async function handleEditBanner(id, formDataBanner) {
+async function handleAddBannerMock(formDataBanner) {
+  const banner = getStoreState().addBanner(formDataBanner);
+  return success(banner, 201);
+}
+
+export async function handleAddBanner(formDataBanner) {
+  return isMockApiEnabled() ? handleAddBannerMock(formDataBanner) : handleAddBannerApi(formDataBanner);
+}
+
+async function handleEditBannerApi(id, formDataBanner) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/banners/${id}`, formDataBanner);
+    setAuthorizationHeader();
+    const response = await axios.put(buildApiUrl(`/banners/${id}`), formDataBanner);
     return response;
   } catch (error) {
     console.error("Error:", error);
@@ -45,16 +53,31 @@ export async function handleEditBanner(id, formDataBanner) {
   }
 }
 
-export async function handleDeleteBanner(id) {
+async function handleEditBannerMock(id, formDataBanner) {
+  const banner = getStoreState().editBanner(id, formDataBanner);
+  return success(banner, 200);
+}
+
+export async function handleEditBanner(id, formDataBanner) {
+  return isMockApiEnabled() ? handleEditBannerMock(id, formDataBanner) : handleEditBannerApi(id, formDataBanner);
+}
+
+async function handleDeleteBannerApi(id) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/banners/${id}`);
+    setAuthorizationHeader();
+    const response = await axios.delete(buildApiUrl(`/banners/${id}`));
     return response;
   } catch (error) {
     console.error("Error fetching Banner data:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleDeleteBannerMock(id) {
+  getStoreState().deleteBanner(id);
+  return success(true, 200);
+}
+
+export async function handleDeleteBanner(id) {
+  return isMockApiEnabled() ? handleDeleteBannerMock(id) : handleDeleteBannerApi(id);
 }

@@ -1,13 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { buildApiUrl, isMockApiEnabled, setAuthorizationHeader } from "@/helpers/apiRuntime";
+import { getStoreState, success } from "@/helpers/mockApi";
 
-export async function handleFetchSubCategoryData() {
+async function handleFetchSubCategoryDataApi() {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/sub-categories");
+    setAuthorizationHeader();
+    const response = await axios.get(buildApiUrl("/sub-categories"));
     return response.data.data;
   } catch (error) {
     console.log(error);
@@ -16,17 +14,30 @@ export async function handleFetchSubCategoryData() {
   }
 }
 
-export async function handleAddSubCategory(name) {
+async function handleFetchSubCategoryDataMock() {
+  return getStoreState().getSubCategories();
+}
+
+export async function handleFetchSubCategoryData() {
+  return isMockApiEnabled() ? handleFetchSubCategoryDataMock() : handleFetchSubCategoryDataApi();
+}
+
+async function handleAddSubCategoryApi(name) {
   try {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/sub-categories", name);
-    // console.log(response);
+    setAuthorizationHeader();
+    const response = await axios.post(buildApiUrl("/sub-categories"), name);
     return response;
   } catch (error) {
     console.error("Error:", error);
     return { error: true, message: error.response?.data?.message || "An error occurred" };
   }
+}
+
+async function handleAddSubCategoryMock(name) {
+  const subCategory = getStoreState().addSubCategory(name);
+  return success(subCategory, 201);
+}
+
+export async function handleAddSubCategory(name) {
+  return isMockApiEnabled() ? handleAddSubCategoryMock(name) : handleAddSubCategoryApi(name);
 }
